@@ -3,23 +3,51 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11157D0F25CCCF6E002415D3 /* Sonarr+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D0E25CCCF6E002415D3 /* Sonarr+Auth.swift */; };
+		11157D1825CCD49F002415D3 /* Sonarr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D1725CCD49F002415D3 /* Sonarr.swift */; };
+		11157D1F25CCEDA4002415D3 /* SonarrModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D1E25CCEDA3002415D3 /* SonarrModels.swift */; };
+		11157D2825CD203D002415D3 /* Sonarr+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D2725CD203D002415D3 /* Sonarr+Calendar.swift */; };
+		11157D2B25CDC295002415D3 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D2A25CDC295002415D3 /* ViewModel.swift */; };
 		11696B6825CBB2D00066B877 /* GalleonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B6725CBB2D00066B877 /* GalleonApp.swift */; };
-		11696B6A25CBB2D00066B877 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B6925CBB2D00066B877 /* ContentView.swift */; };
 		11696B6C25CBB2D30066B877 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11696B6B25CBB2D30066B877 /* Assets.xcassets */; };
 		11696B6F25CBB2D30066B877 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11696B6E25CBB2D30066B877 /* Preview Assets.xcassets */; };
+		11696B7725CBB8670066B877 /* UpcomingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B7625CBB8670066B877 /* UpcomingView.swift */; };
+		11696B7925CBB8740066B877 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B7825CBB8740066B877 /* HistoryView.swift */; };
+		11696B7B25CBB87F0066B877 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B7A25CBB87F0066B877 /* SettingsView.swift */; };
+		11696B7E25CBBB920066B877 /* SonarrModels+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B7D25CBBB920066B877 /* SonarrModels+Calendar.swift */; };
+		11696B8125CBCA770066B877 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B8025CBCA770066B877 /* Dates.swift */; };
+		11696B8425CC711B0066B877 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B8325CC711B0066B877 /* CalendarView.swift */; };
+		11696B8625CC71280066B877 /* AgendaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B8525CC71280066B877 /* AgendaView.swift */; };
+		11696B8825CC7B200066B877 /* CalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B8725CC7B200066B877 /* CalendarDay.swift */; };
+		48808073AE2840B88FC30AF0 /* Pods_Galleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C81D466BA6A42FA403BB614 /* Pods_Galleon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11157D0E25CCCF6E002415D3 /* Sonarr+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonarr+Auth.swift"; sourceTree = "<group>"; };
+		11157D1725CCD49F002415D3 /* Sonarr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sonarr.swift; sourceTree = "<group>"; };
+		11157D1E25CCEDA3002415D3 /* SonarrModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonarrModels.swift; sourceTree = "<group>"; };
+		11157D2725CD203D002415D3 /* Sonarr+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonarr+Calendar.swift"; sourceTree = "<group>"; };
+		11157D2A25CDC295002415D3 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		11696B6425CBB2D00066B877 /* Galleon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Galleon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11696B6725CBB2D00066B877 /* GalleonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleonApp.swift; sourceTree = "<group>"; };
-		11696B6925CBB2D00066B877 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		11696B6B25CBB2D30066B877 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11696B6E25CBB2D30066B877 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		11696B7025CBB2D30066B877 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11696B7625CBB8670066B877 /* UpcomingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingView.swift; sourceTree = "<group>"; };
+		11696B7825CBB8740066B877 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		11696B7A25CBB87F0066B877 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		11696B7D25CBBB920066B877 /* SonarrModels+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SonarrModels+Calendar.swift"; sourceTree = "<group>"; };
+		11696B8025CBCA770066B877 /* Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
+		11696B8325CC711B0066B877 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		11696B8525CC71280066B877 /* AgendaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaView.swift; sourceTree = "<group>"; };
+		11696B8725CC7B200066B877 /* CalendarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDay.swift; sourceTree = "<group>"; };
+		5C81D466BA6A42FA403BB614 /* Pods_Galleon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Galleon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAA7C640271737A5529DBEDC /* Pods-Galleon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Galleon.debug.xcconfig"; path = "Target Support Files/Pods-Galleon/Pods-Galleon.debug.xcconfig"; sourceTree = "<group>"; };
+		FE8F50B0BC945A658F9020D0 /* Pods-Galleon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Galleon.release.xcconfig"; path = "Target Support Files/Pods-Galleon/Pods-Galleon.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48808073AE2840B88FC30AF0 /* Pods_Galleon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +67,8 @@
 			children = (
 				11696B6625CBB2D00066B877 /* Galleon */,
 				11696B6525CBB2D00066B877 /* Products */,
+				FF2EFD208BF1002015094338 /* Pods */,
+				44FBDB62D68EEBB108BBB5A3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,11 +83,16 @@
 		11696B6625CBB2D00066B877 /* Galleon */ = {
 			isa = PBXGroup;
 			children = (
+				11696B8225CC71030066B877 /* Upcoming */,
+				11696B7F25CBCA6A0066B877 /* Helpers */,
+				11696B7C25CBBB750066B877 /* Sonarr */,
 				11696B6725CBB2D00066B877 /* GalleonApp.swift */,
-				11696B6925CBB2D00066B877 /* ContentView.swift */,
 				11696B6B25CBB2D30066B877 /* Assets.xcassets */,
 				11696B7025CBB2D30066B877 /* Info.plist */,
 				11696B6D25CBB2D30066B877 /* Preview Content */,
+				11696B7825CBB8740066B877 /* HistoryView.swift */,
+				11696B7A25CBB87F0066B877 /* SettingsView.swift */,
+				11157D2A25CDC295002415D3 /* ViewModel.swift */,
 			);
 			path = Galleon;
 			sourceTree = "<group>";
@@ -69,6 +105,54 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		11696B7C25CBBB750066B877 /* Sonarr */ = {
+			isa = PBXGroup;
+			children = (
+				11157D1725CCD49F002415D3 /* Sonarr.swift */,
+				11157D2725CD203D002415D3 /* Sonarr+Calendar.swift */,
+				11157D0E25CCCF6E002415D3 /* Sonarr+Auth.swift */,
+				11157D1E25CCEDA3002415D3 /* SonarrModels.swift */,
+				11696B7D25CBBB920066B877 /* SonarrModels+Calendar.swift */,
+			);
+			path = Sonarr;
+			sourceTree = "<group>";
+		};
+		11696B7F25CBCA6A0066B877 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				11696B8025CBCA770066B877 /* Dates.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		11696B8225CC71030066B877 /* Upcoming */ = {
+			isa = PBXGroup;
+			children = (
+				11696B7625CBB8670066B877 /* UpcomingView.swift */,
+				11696B8325CC711B0066B877 /* CalendarView.swift */,
+				11696B8525CC71280066B877 /* AgendaView.swift */,
+				11696B8725CC7B200066B877 /* CalendarDay.swift */,
+			);
+			path = Upcoming;
+			sourceTree = "<group>";
+		};
+		44FBDB62D68EEBB108BBB5A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C81D466BA6A42FA403BB614 /* Pods_Galleon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF2EFD208BF1002015094338 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DAA7C640271737A5529DBEDC /* Pods-Galleon.debug.xcconfig */,
+				FE8F50B0BC945A658F9020D0 /* Pods-Galleon.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -76,9 +160,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11696B7325CBB2D30066B877 /* Build configuration list for PBXNativeTarget "Galleon" */;
 			buildPhases = (
+				4DB7336B1D7BDD5D108267AF /* [CP] Check Pods Manifest.lock */,
 				11696B6025CBB2D00066B877 /* Sources */,
 				11696B6125CBB2D00066B877 /* Frameworks */,
 				11696B6225CBB2D00066B877 /* Resources */,
+				DDCF1257FF597544D54C9F8C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,13 +219,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4DB7336B1D7BDD5D108267AF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Galleon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DDCF1257FF597544D54C9F8C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Galleon/Pods-Galleon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Galleon/Pods-Galleon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Galleon/Pods-Galleon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		11696B6025CBB2D00066B877 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11696B6A25CBB2D00066B877 /* ContentView.swift in Sources */,
+				11696B7B25CBB87F0066B877 /* SettingsView.swift in Sources */,
+				11696B8425CC711B0066B877 /* CalendarView.swift in Sources */,
+				11696B7925CBB8740066B877 /* HistoryView.swift in Sources */,
+				11696B8625CC71280066B877 /* AgendaView.swift in Sources */,
 				11696B6825CBB2D00066B877 /* GalleonApp.swift in Sources */,
+				11696B8125CBCA770066B877 /* Dates.swift in Sources */,
+				11157D2B25CDC295002415D3 /* ViewModel.swift in Sources */,
+				11157D2825CD203D002415D3 /* Sonarr+Calendar.swift in Sources */,
+				11696B7725CBB8670066B877 /* UpcomingView.swift in Sources */,
+				11157D1825CCD49F002415D3 /* Sonarr.swift in Sources */,
+				11696B7E25CBBB920066B877 /* SonarrModels+Calendar.swift in Sources */,
+				11157D0F25CCCF6E002415D3 /* Sonarr+Auth.swift in Sources */,
+				11157D1F25CCEDA4002415D3 /* SonarrModels.swift in Sources */,
+				11696B8825CC7B200066B877 /* CalendarDay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +404,7 @@
 		};
 		11696B7425CBB2D30066B877 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAA7C640271737A5529DBEDC /* Pods-Galleon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -285,6 +426,7 @@
 		};
 		11696B7525CBB2D30066B877 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE8F50B0BC945A658F9020D0 /* Pods-Galleon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
