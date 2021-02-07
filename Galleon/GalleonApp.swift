@@ -7,18 +7,22 @@ import SwiftUI
 struct GalleonApp: App {
     @Environment(\.scenePhase) private var phase
     
+    let viewModel = ViewModel()
     @State private var selection = "upcoming"
 
     var body: some Scene {
         WindowGroup {
             GeometryReader { geometry in
                 TabView(selection: $selection) {
-                    UpcomingView()
+                    UpcomingView(viewModel: viewModel)
+                        .onAppear() {
+                            viewModel.getMonthlyEntries()
+                        }
                         .tabItem {
                             Text("Upcoming")
                         }
                         .tag("upcoming")
-                    HistoryView()
+                    HistoryView(viewModel: viewModel)
                         .tabItem {
                             Text("History")
                         }
