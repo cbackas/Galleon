@@ -5,21 +5,33 @@ import Foundation
 import SwiftUI
 
 final class ViewModel: ObservableObject {
+    // calendar view
     @Published var calendarEntries: [CalDayData] = []
-    @Published var calendarRowHeights = [Int:CGFloat]() // rowHeights calculated in getMonthlyEntries
+    @Published var calendarRowHeights = [Int:CGFloat]()
+    // history view
+    @Published var historyData: [SonarrHistory]
     
     init() {
-        self.getMonthlyEntries()
-    }
-    
-    func getMonthlyEntries() {
         let date = Date()
-        
         let startOfMonth = date.startOfMonth!
         let endOfMonth = date.endOfMonth!
         let hangingStart = startOfMonth.startOfWeek!
         let hangingEnd = endOfMonth.endOfWeek!
+        let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
+        self.calendarEntries = allDates.enumerated().map {
+            (index, day) in
+            return CalDayData(id: .init(), date: day, episodeEntries: [], calendarRow: (index / 7) + 1)
+        }
         
+        self.historyData = []
+    }
+    
+    func getMonthlyEntries() {
+        let date = Date()
+        let startOfMonth = date.startOfMonth!
+        let endOfMonth = date.endOfMonth!
+        let hangingStart = startOfMonth.startOfWeek!
+        let hangingEnd = endOfMonth.endOfWeek!
         SonarrComm.shared.getCalendarEntries(startDate: hangingStart, endDate: hangingEnd) {
             calendar, errorDescription in
             if (errorDescription != nil) {
@@ -27,7 +39,7 @@ final class ViewModel: ObservableObject {
             } else {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd"
-
+                
                 let timeFormatter = DateFormatter()
                 timeFormatter.timeZone = TimeZone.init(abbreviation: "UTC")
                 timeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
@@ -37,6 +49,7 @@ final class ViewModel: ObservableObject {
                 
                 var calendarData = calendar!
                 var calDayData: [CalDayData] = []
+                var newRowHeights = [Int:CGFloat]()
                 
                 // for every day on the cal go through and build out the episodes
                 for (index, calDate) in allDates.enumerated() {
@@ -64,35 +77,18 @@ final class ViewModel: ObservableObject {
                     
                     // calculate the height needed to show these entries and save them on a rowly basis so each row can be the same height
                     let row = (index / 7) + 1
-                    let oldRowHeight = self.calendarRowHeights[row] ?? CGFloat(250)
+                    let oldRowHeight = newRowHeights[row] ?? CGFloat(250)
                     let newRowHeight = CGFloat(40 + (matchingEntries.count * 75))
                     if (oldRowHeight < newRowHeight) {
-                        self.calendarRowHeights[row] = newRowHeight
+                        newRowHeights[row] = newRowHeight
                     }
                     
-                    let newCalDayData = CalDayData(date: calDate, episodeEntries: matchingEntries, calendarRow: row)
+                    let newCalDayData = CalDayData(id: .init(), date: calDate, episodeEntries: matchingEntries, calendarRow: row)
                     calDayData.append(newCalDayData)
                 }
                 self.calendarEntries = calDayData
+                self.calendarRowHeights = newRowHeights
             }
         }
     }
-    
-    //    func updateBoards(closure: @escaping ((_ loaded: Bool) -> Void)) {
-    //        Nextcloud.shared.getBoards() {
-    //            (boards) in
-    //            self.boards = boards
-    //            DataManager().setBoards(boards)
-    //            closure(true)
-    //        }
-    //    }
-    //
-    //    func updateStacks(boardID: Int, closure: @escaping ((_ loaded: Bool) -> Void)) {
-    //        Nextcloud.shared.getStacks(boardID: boardID) {
-    //            (stacks) in
-    //            self.stackModel!.stacks = stacks
-    //            DataManager().setStacks(stacks)
-    //            closure(true)
-    //        }
-    //    }
 }
