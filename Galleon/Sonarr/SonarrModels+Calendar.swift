@@ -4,14 +4,15 @@
 import Foundation
 import SwiftUI
 
-public struct CalDayData: Hashable {    
-    public static func == (lhs: CalDayData, rhs: CalDayData) -> Bool {
-        return lhs.date == rhs.date
-    }
-    
+public struct CalDayData: Hashable, Identifiable {
+    public var id: UUID
     let date: Date
     var episodeEntries: [SonarrCalendarEntry]?
     let calendarRow: Int
+    
+    public static func == (lhs: CalDayData, rhs: CalDayData) -> Bool {
+        return lhs.date == rhs.date
+    }
 }
 
 // MARK: - SonarrCalendarElement
@@ -71,80 +72,8 @@ public struct SonarrMediaInfo: Codable, Hashable {
     var audioCodec, videoCodec: String?
 }
 
-// MARK: - SonarrEpisodeFileQuality
-public struct SonarrEpisodeFileQuality: Codable, Hashable {
-    var quality: SonarrQualityQuality?
-    var revision: SonarrRevision?
-}
-
-// MARK: - SonarrQualityQuality
-public struct SonarrQualityQuality: Codable, Hashable {
-    var id: Int?
-    var name, source: String?
-    var resolution: Int?
-}
-
-// MARK: - SonarrRevision
-public struct SonarrRevision: Codable, Hashable {
-    var version, real: Int?
-    var isRepack: Bool?
-}
-
-// MARK: - SonarrSeries
-public struct SonarrSeries: Codable, Hashable {
-    var title, sortTitle: String?
-    var seasonCount: Int?
-    var status, overview, network, airTime: String?
-    var images: [SonarrImage]?
-    var seasons: [SonarrSeason]?
-    var year: Int?
-    var path: String?
-    var profileID, languageProfileID: Int?
-    var seasonFolder, monitored, useSceneNumbering: Bool?
-    var runtime, tvdbID, tvRageID, tvMazeID: Int?
-    var firstAired, lastInfoSync, seriesType, cleanTitle: String?
-    var imdbID, titleSlug, certification: String?
-    var genres, tags: [String]?
-    var added: String?
-    var ratings: SonarrRatings?
-    var qualityProfileID, id: Int?
-    
-    enum CodingKeys: String, CodingKey {
-        case title, sortTitle, seasonCount, status, overview, network, airTime, images, seasons, year, path
-        case profileID = "profileId"
-        case languageProfileID = "languageProfileId"
-        case seasonFolder, monitored, useSceneNumbering, runtime
-        case tvdbID = "tvdbId"
-        case tvRageID = "tvRageId"
-        case tvMazeID = "tvMazeId"
-        case firstAired, lastInfoSync, seriesType, cleanTitle
-        case imdbID = "imdbId"
-        case titleSlug, certification, genres, tags, added, ratings
-        case qualityProfileID = "qualityProfileId"
-        case id
-    }
-}
-
-// MARK: - SonarrImage
-public struct SonarrImage: Codable, Hashable {
-    var coverType: SonarrCoverType?
-    var url: String?
-}
-
 public enum SonarrCoverType: String, Codable, Hashable {
     case banner = "banner"
     case fanart = "fanart"
     case poster = "poster"
-}
-
-// MARK: - SonarrRatings
-public struct SonarrRatings: Codable, Hashable {
-    var votes: Int?
-    var value: Double?
-}
-
-// MARK: - SonarrSeason
-public struct SonarrSeason: Codable, Hashable {
-    var seasonNumber: Int?
-    var monitored: Bool?
 }
