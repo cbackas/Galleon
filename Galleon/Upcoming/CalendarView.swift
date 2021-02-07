@@ -29,7 +29,7 @@ struct CalendarView: View {
         Divider()
         
         LazyVGrid(columns: columns, spacing: 20) {
-            ForEach(viewModel.calendarEntries, id: \.self) { item in
+            ForEach(viewModel.calendarEntries) { item in
                 CalendarDay(calData: item, viewModel: viewModel)
             }
         }
@@ -38,4 +38,5 @@ struct CalendarView: View {
         .edgesIgnoringSafeArea(.horizontal)
         .edgesIgnoringSafeArea(.top)
     }
+    
 }

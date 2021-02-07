@@ -4,10 +4,13 @@
 import SwiftUI
 
 struct UpcomingView: View {
+    @ObservedObject var viewModel: ViewModel
     @State var currentView = "calendar"
+    
     var monthHeading = "Month - Year"
     
-    init() {
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "LLLL yyyy"
@@ -69,11 +72,11 @@ struct UpcomingView: View {
                 
                 switch currentView {
                 case "calendar":
-                    CalendarView(viewModel: ViewModel())
+                    CalendarView(viewModel: viewModel)
                 case "agenda":
                     AgendaView()
                 default:
-                    CalendarView(viewModel: ViewModel())
+                    CalendarView(viewModel: viewModel)
                 }
             }
         } // scrollview

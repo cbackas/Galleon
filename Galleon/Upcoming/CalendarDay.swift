@@ -5,15 +5,13 @@ import SwiftUI
 
 struct CalendarDay: View {
     @ObservedObject var viewModel: ViewModel
-//    @State var date: Date
     
     var dateText = ""
     var isToday = false
     var isCurrentMonth = true
-    var episodeTitles: [String] = []
     
     var episodes: [SonarrCalendarEntry] = []
-    var rowHeight: CGFloat
+    var rowHeight: CGFloat = 250
     
     init(calData: CalDayData, viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -32,7 +30,6 @@ struct CalendarDay: View {
         
         // episode stuff
         episodes = calData.episodeEntries!
-//        rowHeight = calData.rowHeight
     }
     
     var body: some View {
@@ -50,39 +47,13 @@ struct CalendarDay: View {
                 
                 ForEach(episodes, id: \.self) {
                     episode in
-                    HStack {
-                        RoundedRectangle(cornerRadius: 4, style: .continuous)
-                            .fill(Color.yellow)
-                            .frame(width: 4, height: 60)
-                        VStack {
-                            HStack {
-                                Text((episode.series?.title)!)
-                                    .lineLimit(1)
-                                    .font(.system(size: 20))
-                                Spacer()
-                                Text("\(episode.seasonNumber!)x\(episode.episodeNumber!)")
-                                    .font(.system(size: 15))
-                            }
-                            HStack {
-                                Text(episode.title!)
-                                    .lineLimit(1)
-                                    .font(.system(size: 15))
-                                Spacer()
-                            }
-                            HStack {
-                                Text("time-time")
-                                    .font(.system(size: 15))
-                                Spacer()
-                            }
-                        }
-                        .padding(.leading, -55)
-                    }
-                    .padding(.horizontal, 8)
+                    CalendarEpisode(episode: episode)
                 }
                 Spacer()
             }
             .frame(width: 237, height: rowHeight)
         }
         .buttonStyle(CardButtonStyle())
+        .animation(.easeInOut(duration: 10))
     }
 }
