@@ -4,35 +4,27 @@
 import Foundation
 import SwiftUI
 
-final class ViewModel: ObservableObject {
-    // calendar view
-    @Published var calendarEntries: [CalDayData] = []
-    @Published var calendarRowHeights = [Int:CGFloat]()
-    // history view
-    @Published var historyData: [SonarrHistory]
-    
-    init() {
-        let date = Date()
-        let startOfMonth = date.startOfMonth!
-        let endOfMonth = date.endOfMonth!
-        let hangingStart = startOfMonth.startOfWeek!
-        let hangingEnd = endOfMonth.endOfWeek!
-        let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
-        self.calendarEntries = allDates.enumerated().map {
-            (index, day) in
-            return CalDayData(id: .init(), date: day, episodeEntries: [], calendarRow: (index / 7) + 1)
-        }
-        
-        self.historyData = []
+extension ViewModel {
+    func updateCalendarMonthHeading() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "LLLL yyyy"
+        self.calendarHeading = dateFormatter.string(from: calendarMonth)
     }
     
-    func getMonthlyEntries() {
-        let date = Date()
+    func updateCalendar() {
+        let date = self.calendarMonth
+        
+        self.updateCalendarMonthHeading()
+        
+        let cachedData = self.calendarMonthCache[date] ?? self.calendarEntries
+        self.calendarEntries = cachedData
+        self.calendarRowHeights = self.calendarMonthRowHeightsCache[date] ?? self.calendarRowHeights
+        
         let startOfMonth = date.startOfMonth!
         let endOfMonth = date.endOfMonth!
         let hangingStart = startOfMonth.startOfWeek!
         let hangingEnd = endOfMonth.endOfWeek!
-        SonarrComm.shared.getCalendarEntries(startDate: hangingStart, endDate: hangingEnd) {
+        SonarrComm.shared.getCalendar(startDate: hangingStart, endDate: hangingEnd) {
             calendar, errorDescription in
             if (errorDescription != nil) {
                 print("lol error: \(errorDescription!)")
@@ -82,12 +74,15 @@ final class ViewModel: ObservableObject {
                     if (oldRowHeight < newRowHeight) {
                         newRowHeights[row] = newRowHeight
                     }
-                    
-                    let newCalDayData = CalDayData(id: .init(), date: calDate, episodeEntries: matchingEntries, calendarRow: row)
+                    let newCalDayData = CalDayData(id: .init(), date: calDate, episodeEntries: matchingEntries, row: row)
                     calDayData.append(newCalDayData)
                 }
+                // update view
                 self.calendarEntries = calDayData
                 self.calendarRowHeights = newRowHeights
+                // update cache
+                self.calendarMonthCache[date] = calDayData
+                self.calendarMonthRowHeightsCache[date] = newRowHeights
             }
         }
     }
