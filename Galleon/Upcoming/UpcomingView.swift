@@ -7,35 +7,27 @@ struct UpcomingView: View {
     @ObservedObject var viewModel: ViewModel
     @State var currentView = "calendar"
     
-    var monthHeading = "Month - Year"
-    
-    init(viewModel: ViewModel) {
-        self.viewModel = viewModel
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "LLLL yyyy"
-        monthHeading = dateFormatter.string(from: date)
-    }
-    
     var body: some View {
         ScrollView {
             VStack {
                 HStack {
                     Button(action: {
                         print("Back")
+                        moveMonth(-1)
                     }) {
                         Image(systemName: "chevron.backward.2")
                     }
                     .buttonStyle(PlainButtonStyle())
                     Button(action: {
                         print("Today")
+                        self.moveMonth(nil)
                     }) {
                         Text("Today")
                     }
                     .buttonStyle(DefaultButtonStyle())
                     .padding(.horizontal, -20)
                     Button(action: {
-                        print("Forward")
+                        self.moveMonth(1)
                     }) {
                         Image(systemName: "chevron.forward.2")
                     }
@@ -46,12 +38,12 @@ struct UpcomingView: View {
                     }) {
                         HStack {
                             Spacer()
-                            Text(monthHeading)
+                            Text(self.viewModel.calendarHeading)
+                                .font(.headline)
                             Spacer()
                         }
                     }
                     .buttonStyle(PlainButtonStyle())
-                    //                    .frame(width: 1000)
                     
                     Button(action: {
                         if (currentView == "calendar") {
@@ -68,7 +60,6 @@ struct UpcomingView: View {
                     }
                 }
                 .padding(.horizontal, 60)
-                //                .border(Color.yellow)
                 
                 switch currentView {
                 case "calendar":
@@ -80,5 +71,14 @@ struct UpcomingView: View {
                 }
             }
         } // scrollview
+    }
+    
+    func moveMonth(_ amount: Int?) {
+        if (amount == nil) {
+            self.viewModel.calendarMonth = Date()
+        } else {
+            self.viewModel.calendarMonth = Calendar.current.date(byAdding: .month, value: amount!, to: self.viewModel.calendarMonth)!
+        }
+        self.viewModel.updateCalendar()
     }
 }
