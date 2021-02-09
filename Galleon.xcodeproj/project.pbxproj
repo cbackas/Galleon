@@ -12,6 +12,14 @@
 		11157D1F25CCEDA4002415D3 /* SonarrModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D1E25CCEDA3002415D3 /* SonarrModels.swift */; };
 		11157D2825CD203D002415D3 /* Sonarr+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D2725CD203D002415D3 /* Sonarr+Calendar.swift */; };
 		11157D2B25CDC295002415D3 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D2A25CDC295002415D3 /* ViewModel.swift */; };
+		11157D2F25CE4162002415D3 /* CalendarEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D2E25CE4161002415D3 /* CalendarEpisode.swift */; };
+		11157D3425D07C07002415D3 /* SonarrModels+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D3325D07C06002415D3 /* SonarrModels+History.swift */; };
+		11157D3725D0923D002415D3 /* HistoryRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D3625D0923D002415D3 /* HistoryRecord.swift */; };
+		11157D3A25D1D11F002415D3 /* Sonarr+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D3925D1D11F002415D3 /* Sonarr+History.swift */; };
+		11157D3F25D1D33D002415D3 /* ViewModel+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D3E25D1D33D002415D3 /* ViewModel+Calendar.swift */; };
+		11157D4325D1D35D002415D3 /* ViewModel+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D4225D1D35D002415D3 /* ViewModel+History.swift */; };
+		11157D4A25D24A67002415D3 /* CalendarDayModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D4925D24A66002415D3 /* CalendarDayModal.swift */; };
+		11157D4E25D25A7C002415D3 /* HistoryPaginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11157D4D25D25A7C002415D3 /* HistoryPaginator.swift */; };
 		11696B6825CBB2D00066B877 /* GalleonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11696B6725CBB2D00066B877 /* GalleonApp.swift */; };
 		11696B6C25CBB2D30066B877 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11696B6B25CBB2D30066B877 /* Assets.xcassets */; };
 		11696B6F25CBB2D30066B877 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11696B6E25CBB2D30066B877 /* Preview Assets.xcassets */; };
@@ -32,6 +40,14 @@
 		11157D1E25CCEDA3002415D3 /* SonarrModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonarrModels.swift; sourceTree = "<group>"; };
 		11157D2725CD203D002415D3 /* Sonarr+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonarr+Calendar.swift"; sourceTree = "<group>"; };
 		11157D2A25CDC295002415D3 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		11157D2E25CE4161002415D3 /* CalendarEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEpisode.swift; sourceTree = "<group>"; };
+		11157D3325D07C06002415D3 /* SonarrModels+History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SonarrModels+History.swift"; sourceTree = "<group>"; };
+		11157D3625D0923D002415D3 /* HistoryRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRecord.swift; sourceTree = "<group>"; };
+		11157D3925D1D11F002415D3 /* Sonarr+History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonarr+History.swift"; sourceTree = "<group>"; };
+		11157D3E25D1D33D002415D3 /* ViewModel+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Calendar.swift"; sourceTree = "<group>"; };
+		11157D4225D1D35D002415D3 /* ViewModel+History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+History.swift"; sourceTree = "<group>"; };
+		11157D4925D24A66002415D3 /* CalendarDayModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayModal.swift; sourceTree = "<group>"; };
+		11157D4D25D25A7C002415D3 /* HistoryPaginator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPaginator.swift; sourceTree = "<group>"; };
 		11696B6425CBB2D00066B877 /* Galleon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Galleon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11696B6725CBB2D00066B877 /* GalleonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleonApp.swift; sourceTree = "<group>"; };
 		11696B6B25CBB2D30066B877 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,6 +78,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11157D3125D0788C002415D3 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				11696B7825CBB8740066B877 /* HistoryView.swift */,
+				11157D3625D0923D002415D3 /* HistoryRecord.swift */,
+				11157D4D25D25A7C002415D3 /* HistoryPaginator.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		11157D4125D1D342002415D3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				11157D2A25CDC295002415D3 /* ViewModel.swift */,
+				11157D3E25D1D33D002415D3 /* ViewModel+Calendar.swift */,
+				11157D4225D1D35D002415D3 /* ViewModel+History.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		11157D4625D1D449002415D3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				11157D1E25CCEDA3002415D3 /* SonarrModels.swift */,
+				11696B7D25CBBB920066B877 /* SonarrModels+Calendar.swift */,
+				11157D3325D07C06002415D3 /* SonarrModels+History.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		11157D5025D25F35002415D3 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				11696B8325CC711B0066B877 /* CalendarView.swift */,
+				11696B8725CC7B200066B877 /* CalendarDay.swift */,
+				11157D4925D24A66002415D3 /* CalendarDayModal.swift */,
+				11157D2E25CE4161002415D3 /* CalendarEpisode.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		11157D5325D25F44002415D3 /* Agenda */ = {
+			isa = PBXGroup;
+			children = (
+				11696B8525CC71280066B877 /* AgendaView.swift */,
+			);
+			path = Agenda;
+			sourceTree = "<group>";
+		};
 		11696B5B25CBB2D00066B877 = {
 			isa = PBXGroup;
 			children = (
@@ -83,16 +148,17 @@
 		11696B6625CBB2D00066B877 /* Galleon */ = {
 			isa = PBXGroup;
 			children = (
-				11696B8225CC71030066B877 /* Upcoming */,
-				11696B7F25CBCA6A0066B877 /* Helpers */,
-				11696B7C25CBBB750066B877 /* Sonarr */,
 				11696B6725CBB2D00066B877 /* GalleonApp.swift */,
+				11696B8225CC71030066B877 /* Upcoming */,
+				11157D3125D0788C002415D3 /* History */,
+				11696B7F25CBCA6A0066B877 /* Helpers */,
+				11696B7C25CBBB750066B877 /* SonarrAPI */,
+				11157D4625D1D449002415D3 /* Models */,
+				11157D4125D1D342002415D3 /* ViewModel */,
 				11696B6B25CBB2D30066B877 /* Assets.xcassets */,
 				11696B7025CBB2D30066B877 /* Info.plist */,
 				11696B6D25CBB2D30066B877 /* Preview Content */,
-				11696B7825CBB8740066B877 /* HistoryView.swift */,
 				11696B7A25CBB87F0066B877 /* SettingsView.swift */,
-				11157D2A25CDC295002415D3 /* ViewModel.swift */,
 			);
 			path = Galleon;
 			sourceTree = "<group>";
@@ -105,16 +171,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		11696B7C25CBBB750066B877 /* Sonarr */ = {
+		11696B7C25CBBB750066B877 /* SonarrAPI */ = {
 			isa = PBXGroup;
 			children = (
 				11157D1725CCD49F002415D3 /* Sonarr.swift */,
-				11157D2725CD203D002415D3 /* Sonarr+Calendar.swift */,
 				11157D0E25CCCF6E002415D3 /* Sonarr+Auth.swift */,
-				11157D1E25CCEDA3002415D3 /* SonarrModels.swift */,
-				11696B7D25CBBB920066B877 /* SonarrModels+Calendar.swift */,
+				11157D2725CD203D002415D3 /* Sonarr+Calendar.swift */,
+				11157D3925D1D11F002415D3 /* Sonarr+History.swift */,
 			);
-			path = Sonarr;
+			path = SonarrAPI;
 			sourceTree = "<group>";
 		};
 		11696B7F25CBCA6A0066B877 /* Helpers */ = {
@@ -129,9 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				11696B7625CBB8670066B877 /* UpcomingView.swift */,
-				11696B8325CC711B0066B877 /* CalendarView.swift */,
-				11696B8525CC71280066B877 /* AgendaView.swift */,
-				11696B8725CC7B200066B877 /* CalendarDay.swift */,
+				11157D5325D25F44002415D3 /* Agenda */,
+				11157D5025D25F35002415D3 /* Calendar */,
 			);
 			path = Upcoming;
 			sourceTree = "<group>";
@@ -268,14 +332,22 @@
 			files = (
 				11696B7B25CBB87F0066B877 /* SettingsView.swift in Sources */,
 				11696B8425CC711B0066B877 /* CalendarView.swift in Sources */,
+				11157D2F25CE4162002415D3 /* CalendarEpisode.swift in Sources */,
+				11157D3725D0923D002415D3 /* HistoryRecord.swift in Sources */,
 				11696B7925CBB8740066B877 /* HistoryView.swift in Sources */,
+				11157D3A25D1D11F002415D3 /* Sonarr+History.swift in Sources */,
 				11696B8625CC71280066B877 /* AgendaView.swift in Sources */,
+				11157D4325D1D35D002415D3 /* ViewModel+History.swift in Sources */,
 				11696B6825CBB2D00066B877 /* GalleonApp.swift in Sources */,
+				11157D3F25D1D33D002415D3 /* ViewModel+Calendar.swift in Sources */,
 				11696B8125CBCA770066B877 /* Dates.swift in Sources */,
 				11157D2B25CDC295002415D3 /* ViewModel.swift in Sources */,
+				11157D4E25D25A7C002415D3 /* HistoryPaginator.swift in Sources */,
 				11157D2825CD203D002415D3 /* Sonarr+Calendar.swift in Sources */,
 				11696B7725CBB8670066B877 /* UpcomingView.swift in Sources */,
+				11157D4A25D24A67002415D3 /* CalendarDayModal.swift in Sources */,
 				11157D1825CCD49F002415D3 /* Sonarr.swift in Sources */,
+				11157D3425D07C07002415D3 /* SonarrModels+History.swift in Sources */,
 				11696B7E25CBBB920066B877 /* SonarrModels+Calendar.swift in Sources */,
 				11157D0F25CCCF6E002415D3 /* Sonarr+Auth.swift in Sources */,
 				11157D1F25CCEDA4002415D3 /* SonarrModels.swift in Sources */,
