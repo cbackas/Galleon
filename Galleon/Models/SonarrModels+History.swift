@@ -4,7 +4,7 @@
 import Foundation
 
 // MARK: - SonarrHistory
-struct SonarrHistory: Codable {
+public struct SonarrHistory: Codable {
     var page, pageSize: Int?
     var sortKey, sortDirection: String?
     var totalRecords: Int?

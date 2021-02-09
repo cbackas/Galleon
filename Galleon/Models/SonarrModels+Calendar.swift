@@ -8,7 +8,7 @@ public struct CalDayData: Hashable, Identifiable {
     public var id: UUID
     let date: Date
     var episodeEntries: [SonarrCalendarEntry]?
-    let calendarRow: Int
+    let row: Int
     
     public static func == (lhs: CalDayData, rhs: CalDayData) -> Bool {
         return lhs.date == rhs.date
