@@ -6,7 +6,7 @@ import Alamofire
 import SwiftyJSON
 
 extension SonarrComm {
-    public func getCalendarEntries(startDate: Date, endDate: Date, completion: @escaping (_ entries: [SonarrCalendarEntry]?, _ errorDescription: String?) -> Void) {
+    public func getCalendar(startDate: Date, endDate: Date, completion: @escaping (_ entries: [SonarrCalendarEntry]?, _ errorDescription: String?) -> Void) {
         let storedURL = SonarrComm.shared.getServerURLFromStorage() ?? ""
         let apiKey = SonarrComm.shared.getAPIKeyFromStorage() ?? ""
         let endpoint = "calendar"
@@ -37,8 +37,8 @@ extension SonarrComm {
                     if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
                         let decoder = JSONDecoder()
                         do {
-                            let calEntries = try decoder.decode([SonarrCalendarEntry].self, from: Data(jsonResponse.utf8))
-                            completion(calEntries, nil)
+                            let object = try decoder.decode([SonarrCalendarEntry].self, from: Data(jsonResponse.utf8))
+                            completion(object, nil)
                         } catch {
                             print(error)
                             completion(nil, "Error converting json to struct")

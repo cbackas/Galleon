@@ -23,7 +23,9 @@ public class SonarrComm: SessionDelegate {
             print("Request finished \(request)")
         }
         events.taskDidComplete = { session, task, error in
-            print("Request failed \(session) \(task) \(String(describing: error))")
+            if (!task.description.starts(with: "LocalDataTask")) {
+                print("Request failed \(session) | \(task) | \(String(describing: error))")
+            }
         }
         return [events]
     }
@@ -89,8 +91,8 @@ public class SonarrComm: SessionDelegate {
                     if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
                         let decoder = JSONDecoder()
                         do {
-                            let serverStatus = try decoder.decode(SonarrStatus.self, from: Data(jsonResponse.utf8))
-                            completion(serverStatus, nil)
+                            let object = try decoder.decode(SonarrStatus.self, from: Data(jsonResponse.utf8))
+                            completion(object, nil)
                         } catch {
                             print(error)
                             completion(nil, "Error converting json to struct")
