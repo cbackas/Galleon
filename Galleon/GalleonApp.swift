@@ -8,16 +8,13 @@ struct GalleonApp: App {
     @Environment(\.scenePhase) private var phase
     
     let viewModel = ViewModel()
-    @State private var selection = "upcoming"
+    @State private var selection = "calendar"
 
     var body: some Scene {
         WindowGroup {
             GeometryReader { geometry in
                 TabView(selection: $selection) {
                     UpcomingView(viewModel: viewModel)
-                        .onAppear() {
-                            viewModel.getMonthlyEntries()
-                        }
                         .tabItem {
                             Text("Upcoming")
                         }
@@ -32,6 +29,17 @@ struct GalleonApp: App {
                             Text("Settings")
                         }
                         .tag("settings")
+                }
+                .onChange(of: selection) {_ in
+                    // when tabs get changed, update the data
+                    switch selection {
+                    case "upcoming":
+                        self.viewModel.updateCalendar()
+                    case "history":
+                        self.viewModel.updateHistory(true)
+                    default:
+                        break
+                    }
                 }
             }
         }
