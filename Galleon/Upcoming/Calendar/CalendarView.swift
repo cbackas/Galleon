@@ -2,6 +2,7 @@
 // Using Swift 5.0
 
 import SwiftUI
+import Foundation
 
 struct CalendarView: View {
     @ObservedObject var viewModel: ViewModel

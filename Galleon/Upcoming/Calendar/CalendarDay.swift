@@ -6,6 +6,8 @@ import SwiftUI
 struct CalendarDay: View {
     @ObservedObject var viewModel: ViewModel
     
+    @State private var showModal = false
+    
     var dateText = ""
     var isToday = false
     var isCurrentMonth = true
@@ -16,7 +18,7 @@ struct CalendarDay: View {
     init(calData: CalDayData, viewModel: ViewModel) {
         self.viewModel = viewModel
         // row height comes from ViewModel!!!
-        rowHeight = viewModel.calendarRowHeights[calData.calendarRow] ?? 250
+        rowHeight = viewModel.calendarRowHeights[calData.row] ?? 250
         // date stuff
         let date = calData.date
         
@@ -34,7 +36,7 @@ struct CalendarDay: View {
     
     var body: some View {
         Button(action: {
-            print("Did a thing")
+            self.showModal = true
         }) {
             VStack {
                 HStack {
@@ -52,6 +54,11 @@ struct CalendarDay: View {
                 Spacer()
             }
             .frame(width: 237, height: rowHeight)
+        }
+        .sheet(isPresented: $showModal, onDismiss: {
+            print(self.showModal)
+        }) {
+            CalendarDayModal(episodeEntries: episodes)
         }
         .buttonStyle(CardButtonStyle())
         .animation(.easeInOut(duration: 10))
