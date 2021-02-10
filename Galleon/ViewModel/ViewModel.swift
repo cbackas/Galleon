@@ -12,6 +12,7 @@ final class ViewModel: ObservableObject {
     @Published var calendarRowHeights = [Int:CGFloat]()
     @Published var calendarMonthCache = [Date: [CalDayData]]()
     @Published var calendarMonthRowHeightsCache = [Date: [Int:CGFloat]]()
+    @Published var lastCalendarUpdate: Date = Date()
     // history view
     @Published var historyData: [SonarrHistory] = []
     @Published var visibleHistory: SonarrHistory? = nil
@@ -28,7 +29,7 @@ final class ViewModel: ObservableObject {
         let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
         self.calendarEntries = allDates.enumerated().map {
             (index, day) in
-            return CalDayData(id: .init(), date: day, episodeEntries: [], row: (index / 7) + 1)
+            return CalDayData(date: day, episodeEntries: [], row: (index / 7) + 1)
         }
         
         self.historyData = []

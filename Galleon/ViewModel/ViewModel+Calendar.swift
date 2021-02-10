@@ -8,7 +8,7 @@ extension ViewModel {
     func updateCalendarMonthHeading() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "LLLL yyyy"
-        self.calendarHeading = dateFormatter.string(from: calendarMonth)
+        self.calendarHeading = dateFormatter.string(from: self.calendarMonth)
     }
     
     func updateCalendar() {
@@ -74,12 +74,17 @@ extension ViewModel {
                     if (oldRowHeight < newRowHeight) {
                         newRowHeights[row] = newRowHeight
                     }
-                    let newCalDayData = CalDayData(id: .init(), date: calDate, episodeEntries: matchingEntries, row: row)
+                    let newCalDayData = CalDayData(date: calDate, episodeEntries: matchingEntries, row: row)
                     calDayData.append(newCalDayData)
                 }
+                // if the data we just recieved is for the page thats still selected
+                if (date == self.calendarMonth) {
                 // update view
-                self.calendarEntries = calDayData
-                self.calendarRowHeights = newRowHeights
+                    self.calendarEntries = calDayData
+                    self.calendarRowHeights = newRowHeights
+                }
+                self.lastCalendarUpdate = Date()
+                // always cache the data whether we're showing it still or not
                 // update cache
                 self.calendarMonthCache[date] = calDayData
                 self.calendarMonthRowHeightsCache[date] = newRowHeights
