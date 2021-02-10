@@ -4,8 +4,8 @@
 import Foundation
 import SwiftUI
 
-public struct CalDayData: Hashable, Identifiable {
-    public var id: UUID
+public struct CalDayData: Hashable {
+//    public var id: UUID
     let date: Date
     var episodeEntries: [SonarrCalendarEntry]?
     let row: Int
