@@ -5,6 +5,7 @@ import SwiftUI
 
 struct UpcomingView: View {
     @ObservedObject var viewModel: ViewModel
+    
     @State var currentView = "calendar"
     
     var body: some View {
@@ -20,14 +21,14 @@ struct UpcomingView: View {
                     .buttonStyle(PlainButtonStyle())
                     Button(action: {
                         print("Today")
-                        self.moveMonth(nil)
+                        moveMonth(nil)
                     }) {
                         Text("Today")
                     }
                     .buttonStyle(DefaultButtonStyle())
                     .padding(.horizontal, -20)
                     Button(action: {
-                        self.moveMonth(1)
+                        moveMonth(1)
                     }) {
                         Image(systemName: "chevron.forward.2")
                     }
@@ -38,7 +39,7 @@ struct UpcomingView: View {
                     }) {
                         HStack {
                             Spacer()
-                            Text(self.viewModel.calendarHeading)
+                            Text(viewModel.calendarHeading)
                                 .font(.headline)
                             Spacer()
                         }
@@ -75,10 +76,10 @@ struct UpcomingView: View {
     
     func moveMonth(_ amount: Int?) {
         if (amount == nil) {
-            self.viewModel.calendarMonth = Date()
+            viewModel.calendarMonth = Date()
         } else {
-            self.viewModel.calendarMonth = Calendar.current.date(byAdding: .month, value: amount!, to: self.viewModel.calendarMonth)!
+            viewModel.calendarMonth = Calendar.current.date(byAdding: .month, value: amount!, to: viewModel.calendarMonth)!
         }
-        self.viewModel.updateCalendar()
+        viewModel.updateCalendar()
     }
 }
