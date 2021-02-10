@@ -4,16 +4,15 @@
 import SwiftUI
 
 struct CalendarDayModal: View {
-//    @ObservedObject var viewModel: ViewModel
-    
     var episodeEntries: [SonarrCalendarEntry]
+    @ObservedObject var viewModel: ViewModel
     
     @State private var showModal = false
     
     var body: some View {
         ForEach(episodeEntries, id: \.self) {
             episode in
-            CalendarEpisode(episode: episode)
+            CalendarEpisode(episode: episode, viewModel: viewModel)
         }
     }
 }

@@ -5,13 +5,18 @@ import SwiftUI
 
 struct CalendarEpisode: View {
     var episode: SonarrCalendarEntry
+    @ObservedObject var viewModel: ViewModel
     
-    var color: Color = Color.blue
+    @State var color: Color = Color.gray
+    var dateAirDate: Date
+    var dateFinishLocal: Date
     var startTime: String = ""
     var endTime: String = ""
+    @State var hasAppeared: Bool = false
     
-    init(episode: SonarrCalendarEntry) {
+    init(episode: SonarrCalendarEntry, viewModel: ViewModel) {
         self.episode = episode
+        self.viewModel = viewModel
 
         let utcTimezone = TimeZone.init(abbreviation: "UTC")!
         let localTimezone = TimeZone.autoupdatingCurrent
@@ -27,23 +32,25 @@ struct CalendarEpisode: View {
         timeFormat.pmSymbol = "pm"
         
         // convert string UTC airDate to Date()
-        let dateAirDate = dateTimeFormatUTC.date(from: episode.airDateUTC!)
+        dateAirDate = dateTimeFormatUTC.date(from: episode.airDateUTC!)!
         
         // add runtime (minutes) to the airtime (as a date) and then convert to string
-        let dateFinishLocal = dateAirDate!.addingTimeInterval(TimeInterval(episode.series!.runtime! * 60))
+        dateFinishLocal = dateAirDate.addingTimeInterval(TimeInterval(episode.series!.runtime! * 60))
         
-        self.startTime = timeFormat.string(from: dateAirDate!)
-        self.endTime = timeFormat.string(from: dateFinishLocal)
-        
+        startTime = timeFormat.string(from: dateAirDate)
+        endTime = timeFormat.string(from: dateFinishLocal)
+    }
+    
+    func updateColors() {
         let currentTime = Date()
         if (episode.hasFile!) {
-            self.color = Color.green
+            color = Color.green
         } else if (dateFinishLocal <= currentTime) {
-            self.color = Color.red
-        } else if (dateAirDate! <= currentTime) {
-            self.color = Color.yellow
+            color = Color.red
+        } else if (dateAirDate <= currentTime) {
+            color = Color.yellow
         } else {
-            self.color = Color.blue
+            color = Color.blue
         }
     }
     
@@ -75,6 +82,15 @@ struct CalendarEpisode: View {
                 }
             }
             .padding(.leading, -55)
+        }
+        .onAppear() {
+            if (!hasAppeared) {
+                hasAppeared = true
+                updateColors()
+            }
+        }
+        .onChange(of: viewModel.lastCalendarUpdate) { _ in
+            updateColors()
         }
         .padding(.horizontal, 8)
     }

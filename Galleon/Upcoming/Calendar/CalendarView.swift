@@ -7,8 +7,6 @@ import Foundation
 struct CalendarView: View {
     @ObservedObject var viewModel: ViewModel
     
-    let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -18,6 +16,7 @@ struct CalendarView: View {
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
+    let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var body: some View {
         LazyVGrid(columns: columns, spacing: 20) {
@@ -30,7 +29,8 @@ struct CalendarView: View {
         Divider()
         
         LazyVGrid(columns: columns, spacing: 20) {
-            ForEach(viewModel.calendarEntries) { item in
+            ForEach(viewModel.calendarEntries, id: \.hashValue) {
+                item in
                 CalendarDay(calData: item, viewModel: viewModel)
             }
         }

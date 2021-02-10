@@ -49,8 +49,9 @@ struct CalendarDay: View {
                 
                 ForEach(episodes, id: \.self) {
                     episode in
-                    CalendarEpisode(episode: episode)
+                    CalendarEpisode(episode: episode, viewModel: self.viewModel)
                 }
+                
                 Spacer()
             }
             .frame(width: 237, height: rowHeight)
@@ -58,9 +59,9 @@ struct CalendarDay: View {
         .sheet(isPresented: $showModal, onDismiss: {
             print(self.showModal)
         }) {
-            CalendarDayModal(episodeEntries: episodes)
+            CalendarDayModal(episodeEntries: episodes, viewModel: self.viewModel)
         }
         .buttonStyle(CardButtonStyle())
-        .animation(.easeInOut(duration: 10))
+        .animation(.easeInOut(duration: 0.5))
     }
 }
