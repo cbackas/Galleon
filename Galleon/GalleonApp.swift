@@ -9,7 +9,7 @@ struct GalleonApp: App {
     
     let viewModel = ViewModel()
     @State private var selection = "calendar"
-
+    
     var body: some Scene {
         WindowGroup {
             GeometryReader { geometry in
@@ -19,6 +19,11 @@ struct GalleonApp: App {
                             Text("Upcoming")
                         }
                         .tag("upcoming")
+                    QueueView(viewModel: viewModel)
+                        .tabItem {
+                            Text("Queue")
+                        }
+                        .tag("queue")
                     HistoryView(viewModel: viewModel)
                         .tabItem {
                             Text("History")
@@ -34,9 +39,11 @@ struct GalleonApp: App {
                     // when tabs get changed, update the data
                     switch selection {
                     case "upcoming":
-                        self.viewModel.updateCalendar()
+                        viewModel.updateCalendar()
+                    case "queue":
+                        break
                     case "history":
-                        self.viewModel.updateHistory(true)
+                        viewModel.updateHistory(true)
                     default:
                         break
                     }
