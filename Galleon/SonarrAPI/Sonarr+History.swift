@@ -6,7 +6,7 @@ import Alamofire
 import SwiftyJSON
 
 extension SonarrComm {
-    public func getHistory(page: Int, completion: @escaping (_ entries: SonarrHistory?, _ errorDescription: String?) -> Void) {
+    public func getHistory(episodeID: Int? = nil, page: Int? = nil, completion: @escaping (_ entries: SonarrHistory?, _ errorDescription: String?) -> Void) {
         let storedURL = SonarrComm.shared.getServerURLFromStorage() ?? ""
         let apiKey = SonarrComm.shared.getAPIKeyFromStorage() ?? ""
         let endpoint = "history"
@@ -18,13 +18,19 @@ extension SonarrComm {
         
         let method = HTTPMethod(rawValue: "GET")
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
         var params: [String: Any] = [:]
         params["apikey"] = apiKey
-        params["page"] = page
-        params["pageSize"] = 10
+        if (episodeID != nil) {
+            params["episodeId"] = episodeID
+            params["page"] = 1
+            params["pageSize"] = 100
+        } else if (page != nil) {
+            params["page"] = page
+            params["pageSize"] = 10
+        } else {
+            completion(nil, "Missing episodeID or page")
+            return
+        }
         params["sortDir"] = "desc"
         params["sortKey"] = "date"
         
