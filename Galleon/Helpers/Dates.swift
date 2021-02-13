@@ -44,9 +44,21 @@ extension Date {
         var dates: [Date] = []
         var date = fromDate
         
+        let calendar = Calendar.current
+        
         while date <= toDate {
-            dates.append(date)
+            if (date == fromDate) {
+                var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+                components.hour = 0
+                components.minute = 0
+                components.second = 0
+                
+                date = calendar.date(from: components)!
+            }
+
             guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: date) else { break }
+            
+            dates.append(date)
             date = newDate
         }
         return dates
