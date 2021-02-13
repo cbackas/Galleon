@@ -84,7 +84,9 @@ struct HistoryRecord: View {
         }
         
         let publishedFormatter = DateFormatter()
-        publishedFormatter.dateFormat = "MMM d yyyy h:mmssa"
+        publishedFormatter.dateFormat = "MMM d yyyy h:mm:ssa"
+        publishedFormatter.amSymbol = "am"
+        publishedFormatter.pmSymbol = "pm"
         publishedFormatter.timeZone = TimeZone.autoupdatingCurrent
         publishedDate = publishedFormatter.string(from: date!)
     }
