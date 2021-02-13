@@ -101,35 +101,35 @@ struct HistoryRecord: View {
                                 .frame(maxWidth: 33, alignment: .leading)
                                 .lineLimit(1)
                                 .foregroundColor(record.eventType == "downloadFailed" ? Color.red : Color.white)
-                                .font(.system(size: 25))
+                                .font(.system(size: 23))
                         }
-                        Spacer(minLength: 20)
+                        Spacer(minLength: 15)
                         Text(showTitle)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .lineLimit(1)
-                            .font(.system(size: 25))
-                        Spacer(minLength: 20)
+                            .font(.system(size: 23))
+                        Spacer(minLength: 15)
                         Text(seasonEpisode)
                             .frame(maxWidth: 80, alignment: .leading)
                             .lineLimit(1)
-                            .font(.system(size: 25))
-                        Spacer(minLength: 20)
+                            .font(.system(size: 23))
+                        Spacer(minLength: 15)
                     }
                     Group {
                         Text(episodeTitle)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .lineLimit(1)
-                            .font(.system(size: 25))
-                        Spacer(minLength: 20)
+                            .font(.system(size: 23))
+                        Spacer(minLength: 15)
                         Text(quality)
                             .frame(maxWidth: 160, alignment: .trailing)
                             .lineLimit(1)
-                            .font(.system(size: 25))
-                        Spacer(minLength: 20)
+                            .font(.system(size: 23))
+                        Spacer(minLength: 15)
                         Text(time)
                             .frame(maxWidth: 160, alignment: .trailing)
                             .lineLimit(1)
-                            .font(.system(size: 25))
+                            .font(.system(size: 23))
                     }
                 }
                 .frame(width: 1400)
@@ -137,9 +137,10 @@ struct HistoryRecord: View {
             
             if (expanded) {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(Color.gray)
-                        .frame(width: 1400)
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color(UIColor.darkGray))
+                        .shadow(radius: 20)
+                        .frame(width: 1475)
                         .zIndex(0)
                     Group {
                         VStack {

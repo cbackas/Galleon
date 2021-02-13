@@ -15,7 +15,7 @@ struct HistoryRecordDataItem: View {
     var body: some View {
         HStack {
             Text(title)
-                .frame(maxWidth: 350, alignment: .trailing)
+                .frame(maxWidth: 300, alignment: .trailing)
                 .font(.system(size: 25, weight: .heavy, design: .default))
             Text(value)
                 .frame(maxWidth: .infinity, alignment: .leading)
