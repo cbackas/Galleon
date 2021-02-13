@@ -4,33 +4,33 @@
 import SwiftUI
 
 struct HistoryPaginator: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var historyViewModel: HistoryViewModel
     
     var body: some View {
         HStack {
             Spacer()
             
             Button(action: {
-                self.viewModel.selectedHistoryPage = 1
-                self.viewModel.updateHistory(true)
+                historyViewModel.selectedHistoryPage = 1
+                historyViewModel.updateHistory(true)
             }) {
                 Image(systemName: "chevron.backward.2")
             }
-            .disabled(self.viewModel.selectedHistoryPage == 1)
+            .disabled(historyViewModel.selectedHistoryPage == 1)
             .buttonStyle(PlainButtonStyle())
             
             Button(action: {
-                self.viewModel.selectedHistoryPage -= 1
-                self.viewModel.updateHistory(true)
+                historyViewModel.selectedHistoryPage -= 1
+                historyViewModel.updateHistory(true)
             }) {
                 Image(systemName: "chevron.backward")
             }
-            .disabled(self.viewModel.selectedHistoryPage == 1)
+            .disabled(historyViewModel.selectedHistoryPage == 1)
             .buttonStyle(PlainButtonStyle())
             
             Group {
-                if (self.viewModel.historyLoaded) {
-                    Text("\(self.viewModel.selectedHistoryPage) / \(self.viewModel.totalHistoryPages)")
+                if (historyViewModel.historyLoaded) {
+                    Text("\(historyViewModel.selectedHistoryPage) / \(historyViewModel.totalHistoryPages)")
                 } else {
                     ProgressView()
                         .scaleEffect(x: 0.8, y: 0.8, anchor: .center)
@@ -41,23 +41,23 @@ struct HistoryPaginator: View {
             .padding(.horizontal, -20)
             
             Button(action: {
-                self.viewModel.selectedHistoryPage += 1
-                self.viewModel.updateHistory(true)
+                historyViewModel.selectedHistoryPage += 1
+                historyViewModel.updateHistory(true)
                 
             }) {
                 Image(systemName: "chevron.forward")
             }
-            .disabled(self.viewModel.selectedHistoryPage == self.viewModel.totalHistoryPages)
+            .disabled(historyViewModel.selectedHistoryPage == historyViewModel.totalHistoryPages)
             .buttonStyle(PlainButtonStyle())
             
             Button(action: {
-                self.viewModel.selectedHistoryPage = self.viewModel.totalHistoryPages
-                self.viewModel.updateHistory(true)
+                historyViewModel.selectedHistoryPage = historyViewModel.totalHistoryPages
+                historyViewModel.updateHistory(true)
                 
             }) {
                 Image(systemName: "chevron.forward.2")
             }
-            .disabled(self.viewModel.selectedHistoryPage == self.viewModel.totalHistoryPages)
+            .disabled(historyViewModel.selectedHistoryPage == historyViewModel.totalHistoryPages)
             .buttonStyle(PlainButtonStyle())
             
             Spacer()
