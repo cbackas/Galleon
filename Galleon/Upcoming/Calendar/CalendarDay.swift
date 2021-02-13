@@ -4,7 +4,7 @@
 import SwiftUI
 
 struct CalendarDay: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var calendarViewModel: CalendarViewModel
     
     @State private var episodeSelectionMode = false
     
@@ -16,14 +16,14 @@ struct CalendarDay: View {
     var episodes: [SonarrCalendarEntry] = []
     var rowHeight: CGFloat = 250
     
-    init(calData: CalDayData, viewModel: ViewModel) {
+    init(calData: CalDayData, calendarViewModel: CalendarViewModel) {
         self.calData = calData
-        self.viewModel = viewModel
+        self.calendarViewModel = calendarViewModel
         
         // episode stuff
         episodes = calData.episodeEntries!
         // row height comes from ViewModel!!!
-        rowHeight = viewModel.calendarRowHeights[calData.row] ?? 250
+        rowHeight = calendarViewModel.calendarRowHeights[calData.row] ?? 250
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd"
@@ -49,7 +49,7 @@ struct CalendarDay: View {
                 
                 ForEach(episodes, id: \.self) {
                     episode in
-                    CalendarEpisode(episode: episode, viewModel: viewModel)
+                    CalendarEpisode(episode: episode, calendarViewModel: calendarViewModel)
                 }
                 
                 Spacer()
@@ -57,7 +57,7 @@ struct CalendarDay: View {
             .frame(width: 237, height: rowHeight)
         }
         .sheet(isPresented: $episodeSelectionMode) {
-            CalendarDaySheet(date: calData.date, episodeEntries: episodes, viewModel: viewModel)
+            CalendarDaySheet(date: calData.date, episodeEntries: episodes, calendarViewModel: calendarViewModel)
         }
         .buttonStyle(CardButtonStyle())
         .animation(.easeInOut(duration: 0.5))

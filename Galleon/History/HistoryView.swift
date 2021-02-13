@@ -4,19 +4,19 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var historyViewModel: HistoryViewModel
     
     var body: some View {
         ScrollView {
             VStack {
-                HistoryPaginator(viewModel: self.viewModel)
+                HistoryPaginator(historyViewModel: historyViewModel)
                 
-                ForEach(self.viewModel.visibleHistory?.records ?? [], id: \.id) {
+                ForEach(historyViewModel.visibleHistory?.records ?? [], id: \.id) {
                     entry in
                     HistoryRecord(record: entry)
                 }
                 
-                HistoryPaginator(viewModel: self.viewModel)
+                HistoryPaginator(historyViewModel: historyViewModel)
             }
         } // scrollview
     }

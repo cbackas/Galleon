@@ -5,7 +5,16 @@ import SwiftUI
 
 struct EpisodeSheet: View {
     var episode: SonarrCalendarEntry
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var calendarViewModel: CalendarViewModel
+    
+    @ObservedObject var episodeViewModel: EpisodeViewModel = EpisodeViewModel.shared
+    
+    init(episode: SonarrCalendarEntry, calendarViewModel: CalendarViewModel) {
+        self.episode = episode
+        self.calendarViewModel = calendarViewModel
+        
+        episodeViewModel.episode = episode
+    }
     
     @State private var selection = "details"
     
@@ -15,7 +24,7 @@ struct EpisodeSheet: View {
                 .font(.headline)
             
             TabView(selection: $selection) {
-                EpisodeDetail(episode: episode, viewModel: viewModel)
+                EpisodeDetail()
                     .tabItem {
                         Text("Details")
                     }
@@ -30,6 +39,11 @@ struct EpisodeSheet: View {
                         Text("Search")
                     }
                     .tag("search")
+            }
+            .onChange(of: selection) { _ in
+                if (selection == "history") {
+                    episodeViewModel.updateHistory(false)
+                }
             }
         }
     }

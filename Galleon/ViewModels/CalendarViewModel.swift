@@ -4,7 +4,40 @@
 import Foundation
 import SwiftUI
 
-extension ViewModel {
+final class CalendarViewModel: ObservableObject {
+    // calendar view
+    @Published var calendarEntries: [CalDayData] = []
+    @Published var calendarMonth: Date = Date()
+    @Published var calendarHeading: String = ""
+    @Published var calendarRowHeights = [Int:CGFloat]()
+    @Published var calendarMonthCache = [Date: [CalDayData]]()
+    @Published var calendarMonthRowHeightsCache = [Date: [Int:CGFloat]]()
+    @Published var lastCalendarUpdate: Date = Date()
+    
+    init() {
+        let date = Date()
+        let startOfMonth = date.startOfMonth!
+        let endOfMonth = date.endOfMonth!
+        let hangingStart = startOfMonth.startOfWeek!
+        let hangingEnd = endOfMonth.endOfWeek!
+        let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
+        self.calendarEntries = allDates.enumerated().map {
+            (index, day) in
+            return CalDayData(date: day, episodeEntries: [], row: (index / 7) + 1)
+        }
+        
+        self.calendarUpdateLoop()
+    }
+    
+    // update the calendar every minute
+    func calendarUpdateLoop() -> Void {
+//        print("[Keep Alive] Calendar updater")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+            self.updateCalendar()
+            self.calendarUpdateLoop()
+        }
+    }
+    
     func updateCalendarMonthHeading() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "LLLL yyyy"

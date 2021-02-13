@@ -7,24 +7,26 @@ import SwiftUI
 struct GalleonApp: App {
     @Environment(\.scenePhase) private var phase
     
-    let viewModel = ViewModel()
+    let calendarViewModel = CalendarViewModel()
+    let queueViewModel = QueueViewModel()
+    let historyViewModel = HistoryViewModel()
     @State private var selection = "calendar"
     
     var body: some Scene {
         WindowGroup {
             GeometryReader { geometry in
                 TabView(selection: $selection) {
-                    UpcomingView(viewModel: viewModel)
+                    UpcomingView(calendarViewModel: calendarViewModel)
                         .tabItem {
                             Text("Upcoming")
                         }
                         .tag("upcoming")
-                    QueueView(viewModel: viewModel)
+                    QueueView(queueViewModel: queueViewModel)
                         .tabItem {
                             Text("Queue")
                         }
                         .tag("queue")
-                    HistoryView(viewModel: viewModel)
+                    HistoryView(historyViewModel: historyViewModel)
                         .tabItem {
                             Text("History")
                         }
@@ -39,11 +41,11 @@ struct GalleonApp: App {
                     // when tabs get changed, update the data
                     switch selection {
                     case "upcoming":
-                        viewModel.updateCalendar()
+                        calendarViewModel.updateCalendar()
                     case "queue":
                         break
                     case "history":
-                        viewModel.updateHistory(true)
+                        historyViewModel.updateHistory(true)
                     default:
                         break
                     }

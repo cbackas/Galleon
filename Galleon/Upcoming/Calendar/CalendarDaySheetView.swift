@@ -6,17 +6,17 @@ import SwiftUI
 struct CalendarDaySheet: View {
     var date: Date
     var episodeEntries: [SonarrCalendarEntry]
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var calendarViewModel: CalendarViewModel
     
     @State private var showModal = false
     
     var dateFormatter = DateFormatter()
     var dateHeading = ""
     
-    init(date: Date, episodeEntries: [SonarrCalendarEntry], viewModel: ViewModel) {
+    init(date: Date, episodeEntries: [SonarrCalendarEntry], calendarViewModel: CalendarViewModel) {
         self.date = date
         self.episodeEntries = episodeEntries
-        self.viewModel = viewModel
+        self.calendarViewModel = calendarViewModel
         
         dateFormatter.dateFormat = "EEEE, MMM d yyyy"
         dateHeading = dateFormatter.string(from: date)
@@ -28,7 +28,7 @@ struct CalendarDaySheet: View {
                 VStack {
                     ForEach(episodeEntries, id: \.self) {
                         episode in
-                        CalendarEpisodeButton(episode: episode, viewModel: viewModel)
+                        CalendarEpisodeButton(episode: episode, calendarViewModel: calendarViewModel)
                     }
                     Spacer()
                 }

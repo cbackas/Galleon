@@ -5,7 +5,7 @@ import SwiftUI
 import Foundation
 
 struct CalendarView: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var calendarViewModel: CalendarViewModel
     
     let columns = [
         GridItem(.flexible()),
@@ -19,25 +19,27 @@ struct CalendarView: View {
     let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 20) {
-            ForEach(weekdays, id: \.self) { item in
-                Text(item)
+        ScrollView { // this scrollview improves scroll performance
+            LazyVGrid(columns: columns, spacing: 20) {
+                ForEach(weekdays, id: \.self) { item in
+                    Text(item)
+                }
             }
-        }
-        .padding(.horizontal, 40)
-        
-        Divider()
-        
-        LazyVGrid(columns: columns, spacing: 20) {
-            ForEach(viewModel.calendarEntries, id: \.hashValue) {
-                item in
-                CalendarDay(calData: item, viewModel: viewModel)
+            .padding(.horizontal, 40)
+            
+            Divider()
+            
+            LazyVGrid(columns: columns, spacing: 20) {
+                ForEach(calendarViewModel.calendarEntries, id: \.hashValue) {
+                    item in
+                    CalendarDay(calData: item, calendarViewModel: calendarViewModel)
+                }
             }
+            .frame(width: 1850)
+            .padding(.horizontal, 40)
+            .edgesIgnoringSafeArea(.horizontal)
+            .edgesIgnoringSafeArea(.top)
         }
-        .frame(width: 1850)
-        .padding(.horizontal, 40)
-        .edgesIgnoringSafeArea(.horizontal)
-        .edgesIgnoringSafeArea(.top)
     }
     
 }

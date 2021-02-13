@@ -2,8 +2,30 @@
 // Using Swift 5.0
 
 import Foundation
+import SwiftUI
 
-extension ViewModel {
+final class HistoryViewModel: ObservableObject {
+    // calendar view
+    @Published var historyData: [SonarrHistory] = []
+    @Published var visibleHistory: SonarrHistory? = nil
+    @Published var selectedHistoryPage: Int = 1
+    @Published var totalHistoryPages: Int = 1
+    @Published var historyLoaded: Bool = false
+    
+    init() {
+        self.historyData = []
+        self.historyUpdateLoop()
+    }
+    
+    // update the history data every 2 minutes
+    func historyUpdateLoop() -> Void {
+//        print("[Keep Alive] History updater")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 120) {
+            self.updateHistory()
+            self.historyUpdateLoop()
+        }
+    }
+    
     // calculate the number of pages for the paginator
     func updateHistoryTotalPages() {
         let totalRecords = self.visibleHistory?.totalRecords ?? 1

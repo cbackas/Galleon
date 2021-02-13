@@ -4,7 +4,7 @@
 import SwiftUI
 
 struct UpcomingView: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var calendarViewModel: CalendarViewModel
     
     @State var currentView = "calendar"
     
@@ -39,7 +39,7 @@ struct UpcomingView: View {
                     }) {
                         HStack {
                             Spacer()
-                            Text(viewModel.calendarHeading)
+                            Text(calendarViewModel.calendarHeading)
                                 .font(.headline)
                             Spacer()
                         }
@@ -64,11 +64,11 @@ struct UpcomingView: View {
                 
                 switch currentView {
                 case "calendar":
-                    CalendarView(viewModel: viewModel)
+                    CalendarView(calendarViewModel: calendarViewModel)
                 case "agenda":
                     AgendaView()
                 default:
-                    CalendarView(viewModel: viewModel)
+                    CalendarView(calendarViewModel: calendarViewModel)
                 }
             }
         } // scrollview
@@ -76,10 +76,10 @@ struct UpcomingView: View {
     
     func moveMonth(_ amount: Int?) {
         if (amount == nil) {
-            viewModel.calendarMonth = Date()
+            calendarViewModel.calendarMonth = Date()
         } else {
-            viewModel.calendarMonth = Calendar.current.date(byAdding: .month, value: amount!, to: viewModel.calendarMonth)!
+            calendarViewModel.calendarMonth = Calendar.current.date(byAdding: .month, value: amount!, to: calendarViewModel.calendarMonth)!
         }
-        viewModel.updateCalendar()
+        calendarViewModel.updateCalendar()
     }
 }

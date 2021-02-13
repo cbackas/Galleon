@@ -5,7 +5,9 @@ import SwiftUI
 
 struct CalendarEpisode: View {
     var episode: SonarrCalendarEntry
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var calendarViewModel: CalendarViewModel
+    
+    var episodeViewModel: EpisodeViewModel = EpisodeViewModel.shared
     
     @State var color: Color = Color.gray
     var dateAirDate: Date
@@ -14,9 +16,10 @@ struct CalendarEpisode: View {
     var endTime: String = ""
     @State var hasAppeared: Bool = false
     
-    init(episode: SonarrCalendarEntry, viewModel: ViewModel) {
+    init(episode: SonarrCalendarEntry, calendarViewModel: CalendarViewModel) {
         self.episode = episode
-        self.viewModel = viewModel
+        self.calendarViewModel = calendarViewModel
+        episodeViewModel.episode = episode
 
         let utcTimezone = TimeZone.init(abbreviation: "UTC")!
         let localTimezone = TimeZone.autoupdatingCurrent
@@ -89,7 +92,7 @@ struct CalendarEpisode: View {
                 updateColors()
             }
         }
-        .onChange(of: viewModel.lastCalendarUpdate) { _ in
+        .onChange(of: calendarViewModel.lastCalendarUpdate) { _ in
             updateColors()
         }
         .padding(.horizontal, 8)

@@ -4,17 +4,13 @@
 import SwiftUI
 
 struct EpisodeDetail: View {
-    var episode: SonarrCalendarEntry
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var episodeViewModel: EpisodeViewModel = EpisodeViewModel.shared
     
     var airs: String = ""
     var quality: String = ""
     var episodeSize: String = ""
     
-    init(episode: SonarrCalendarEntry, viewModel: ViewModel) {
-        self.episode = episode
-        self.viewModel = viewModel
-        
+    init() {
         initAirs()
         initQuality()
         initEpisodeSize()
@@ -39,25 +35,25 @@ struct EpisodeDetail: View {
         timeFormat.pmSymbol = "pm"
         
         // convert string UTC airDate to Date()
-        let dateAirDate = dateTimeFormatUTC.date(from: episode.airDateUTC!)!
+        let dateAirDate = dateTimeFormatUTC.date(from: (episodeViewModel.episode?.airDateUTC!)!)!
         
         let episodeDate = dateFormat.string(from: dateAirDate)
         let episodeTime = timeFormat.string(from: dateAirDate)
         
-        airs = "\(episodeDate) at \(episodeTime) on \(episode.series!.network!)"
+        airs = "\(episodeDate) at \(episodeTime) on \(episodeViewModel.episode!.series!.network!)"
     }
     
     mutating func initQuality() {
-        quality = "\(episode.series!.qualityProfileID!)"
+        quality = String((episodeViewModel.episode?.series!.qualityProfileID!)!)
     }
     
     mutating func initEpisodeSize() {
-        if (episode.hasFile!) {
+        if ((episodeViewModel.episode?.hasFile!) != nil) {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
             formatter.minimumFractionDigits = 0
             formatter.maximumFractionDigits = 1
-            let sizeBytes: Int = episode.episodeFile!.size!
+            let sizeBytes: Int = (episodeViewModel.episode?.episodeFile!.size!)!
             let gb = Double(sizeBytes / 1000000000) + (Double(sizeBytes % 1000000000)/1000000000)
             let gbFormatted = formatter.string(from: NSNumber(value: gb))
             episodeSize = "\(gbFormatted!) gb"
@@ -89,12 +85,12 @@ struct EpisodeDetail: View {
                 Spacer()
             }
             
-            Text(episode.overview ?? "No episode overview.")
+            Text(episodeViewModel.episode?.overview ?? "No episode overview.")
                 .font(.system(size: 24))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 40)
             
-            if (episode.hasFile!) {
+            if (episodeViewModel.episode!.hasFile!) {
                 VStack {
                     HStack {
                         Text("Path")
@@ -102,7 +98,7 @@ struct EpisodeDetail: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Text("Size")
                             .font(.system(size: 22, weight: .heavy, design: .default))
-                            .frame(maxWidth: 250, alignment: .leading)
+                            .frame(maxWidth: 75, alignment: .leading)
                         Text("Quality")
                             .font(.system(size: 22, weight: .heavy, design: .default))
                             .frame(maxWidth: 250, alignment: .leading)
@@ -110,13 +106,13 @@ struct EpisodeDetail: View {
                     Divider()
                     
                     HStack {
-                        Text(episode.episodeFile!.path!)
+                        Text(episodeViewModel.episode!.episodeFile!.path!)
                             .font(.system(size: 22))
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Text(episodeSize)
                             .font(.system(size: 22))
-                            .frame(maxWidth: 250, alignment: .leading)
-                        Text(episode.episodeFile!.quality!.quality!.name!)
+                            .frame(maxWidth: 75, alignment: .leading)
+                        Text(episodeViewModel.episode!.episodeFile!.quality!.quality!.name!)
                             .font(.system(size: 22))
                             .frame(maxWidth: 250, alignment: .leading)
                     }
