@@ -7,8 +7,6 @@ struct CalendarEpisode: View {
     var episode: SonarrCalendarEntry
     @ObservedObject var calendarViewModel: CalendarViewModel
     
-    var episodeViewModel: EpisodeViewModel = EpisodeViewModel.shared
-    
     @State var color: Color = Color.gray
     var dateAirDate: Date
     var dateFinishLocal: Date
@@ -19,7 +17,6 @@ struct CalendarEpisode: View {
     init(episode: SonarrCalendarEntry, calendarViewModel: CalendarViewModel) {
         self.episode = episode
         self.calendarViewModel = calendarViewModel
-        episodeViewModel.episode = episode
 
         let utcTimezone = TimeZone.init(abbreviation: "UTC")!
         let localTimezone = TimeZone.autoupdatingCurrent

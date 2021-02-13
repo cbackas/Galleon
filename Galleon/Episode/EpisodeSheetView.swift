@@ -5,16 +5,8 @@ import SwiftUI
 
 struct EpisodeSheet: View {
     var episode: SonarrCalendarEntry
-    @ObservedObject var calendarViewModel: CalendarViewModel
     
-    @ObservedObject var episodeViewModel: EpisodeViewModel = EpisodeViewModel.shared
-    
-    init(episode: SonarrCalendarEntry, calendarViewModel: CalendarViewModel) {
-        self.episode = episode
-        self.calendarViewModel = calendarViewModel
-        
-        episodeViewModel.episode = episode
-    }
+    @State var episodeHistory: [SonarrHistoryRecord] = []
     
     @State private var selection = "details"
     
@@ -24,12 +16,12 @@ struct EpisodeSheet: View {
                 .font(.headline)
             
             TabView(selection: $selection) {
-                EpisodeDetail()
+                EpisodeDetail(episode: episode)
                     .tabItem {
                         Text("Details")
                     }
                     .tag("details")
-                EpisodeHistory()
+                EpisodeHistory(episode: episode, episodeHistory: episodeHistory)
                     .tabItem {
                         Text("History")
                     }
@@ -42,7 +34,15 @@ struct EpisodeSheet: View {
             }
             .onChange(of: selection) { _ in
                 if (selection == "history") {
-                    episodeViewModel.updateHistory(false)
+                    SonarrComm.shared.getHistory(episodeID: episode.id!) {
+                        history, errorDescription in
+                        if (errorDescription != nil) {
+                            print("lol error: \(errorDescription!)")
+                        } else {
+                            // update items user can see
+                            episodeHistory = history!.records!
+                        }
+                    }
                 }
             }
         }

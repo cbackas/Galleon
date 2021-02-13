@@ -15,7 +15,7 @@ struct CalendarEpisodeButton: View {
         }) {
             CalendarEpisode(episode: episode, calendarViewModel: calendarViewModel)
                 .sheet(isPresented: $showEpisodeSheet) {
-                    EpisodeSheet(episode: episode, calendarViewModel: calendarViewModel)
+                    EpisodeSheet(episode: episode)
                 }
         }
         .padding(.horizontal, 40)

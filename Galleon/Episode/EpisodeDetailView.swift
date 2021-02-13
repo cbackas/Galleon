@@ -4,19 +4,23 @@
 import SwiftUI
 
 struct EpisodeDetail: View {
-    @ObservedObject var episodeViewModel: EpisodeViewModel = EpisodeViewModel.shared
+    var episode: SonarrCalendarEntry
+//    @ObservedObject var episodeViewModel: EpisodeViewModel
     
     var airs: String = ""
     var quality: String = ""
     var episodeSize: String = ""
     
-    init() {
-        initAirs()
-        initQuality()
-        initEpisodeSize()
+    init(episode: SonarrCalendarEntry) {
+//        self.episodeViewModel = episodeViewModel
+        self.episode = episode
+        
+        initAirs(episode: episode)
+        initQuality(episode: episode)
+        initEpisodeSize(episode: episode)
     }
     
-    mutating func initAirs() {
+    mutating func initAirs(episode: SonarrCalendarEntry) {
         let utcTimezone = TimeZone.init(abbreviation: "UTC")!
         let localTimezone = TimeZone.autoupdatingCurrent
         
@@ -35,28 +39,28 @@ struct EpisodeDetail: View {
         timeFormat.pmSymbol = "pm"
         
         // convert string UTC airDate to Date()
-        let dateAirDate = dateTimeFormatUTC.date(from: (episodeViewModel.episode?.airDateUTC!)!)!
+        let dateAirDate = dateTimeFormatUTC.date(from: (episode.airDateUTC!))!
         
         let episodeDate = dateFormat.string(from: dateAirDate)
         let episodeTime = timeFormat.string(from: dateAirDate)
         
-        airs = "\(episodeDate) at \(episodeTime) on \(episodeViewModel.episode!.series!.network!)"
+        airs = "\(episodeDate) at \(episodeTime) on \(episode.series!.network!)"
     }
     
-    mutating func initQuality() {
-        quality = String((episodeViewModel.episode?.series!.qualityProfileID!)!)
+    mutating func initQuality(episode: SonarrCalendarEntry) {
+        quality = String((episode.series!.qualityProfileID!))
     }
     
-    mutating func initEpisodeSize() {
-        if ((episodeViewModel.episode?.hasFile!) != nil) {
+    mutating func initEpisodeSize(episode: SonarrCalendarEntry) {
+        if (episode.hasFile! == true) {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
             formatter.minimumFractionDigits = 0
             formatter.maximumFractionDigits = 1
-            let sizeBytes: Int = (episodeViewModel.episode?.episodeFile!.size!)!
+            let sizeBytes: Int = (episode.episodeFile?.size ?? 0)!
             let gb = Double(sizeBytes / 1000000000) + (Double(sizeBytes % 1000000000)/1000000000)
             let gbFormatted = formatter.string(from: NSNumber(value: gb))
-            episodeSize = "\(gbFormatted!) gb"
+            episodeSize = "\(gbFormatted!) GB"
         } else {
             episodeSize = ""
         }
@@ -85,12 +89,12 @@ struct EpisodeDetail: View {
                 Spacer()
             }
             
-            Text(episodeViewModel.episode?.overview ?? "No episode overview.")
+            Text(episode.overview ?? "No episode overview.")
                 .font(.system(size: 24))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 40)
             
-            if (episodeViewModel.episode!.hasFile!) {
+            if (episode.hasFile!) {
                 VStack {
                     HStack {
                         Text("Path")
@@ -106,13 +110,13 @@ struct EpisodeDetail: View {
                     Divider()
                     
                     HStack {
-                        Text(episodeViewModel.episode!.episodeFile!.path!)
+                        Text(episode.episodeFile!.path!)
                             .font(.system(size: 22))
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Text(episodeSize)
                             .font(.system(size: 22))
                             .frame(maxWidth: 75, alignment: .leading)
-                        Text(episodeViewModel.episode!.episodeFile!.quality!.quality!.name!)
+                        Text(episode.episodeFile!.quality!.quality!.name!)
                             .font(.system(size: 22))
                             .frame(maxWidth: 250, alignment: .leading)
                     }
