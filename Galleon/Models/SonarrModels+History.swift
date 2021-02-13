@@ -37,11 +37,36 @@ public struct SonarrHistoryRecord: Codable, Hashable {
 // MARK: - SonarrData
 public struct SonarrData: Codable, Hashable {
     var reason: String?
+    var indexer: String?
+    var nzbInfoURL: String?
+    var releaseGroup, age, ageHours, ageMinutes: String?
+    var publishedDate, downloadClient, downloadClientName, size: String?
+    var downloadURL: String?
+    var guid: String?
+    var tvdbID, tvRageID, dataProtocol, preferredWordScore: String?
+    var torrentInfoHash: String?
+    var fileID, droppedPath, importedPath: String?
+    var sourcePath, sourceRelativePath, path, relativePath: String?
+
+    enum CodingKeys: String, CodingKey {
+        case indexer
+        case nzbInfoURL = "nzbInfoUrl"
+        case releaseGroup, age, ageHours, ageMinutes, publishedDate, downloadClient, downloadClientName, size
+        case downloadURL = "downloadUrl"
+        case guid
+        case tvdbID = "tvdbId"
+        case tvRageID = "tvRageId"
+        case dataProtocol = "protocol"
+        case preferredWordScore, torrentInfoHash
+        case fileID = "fileId"
+        case droppedPath, importedPath
+    }
     
     public static func == (lhs: SonarrData, rhs: SonarrData) -> Bool {
         lhs.reason == rhs.reason
     }
 }
+   
 
 // MARK: - SonarrEpisode
 public struct SonarrEpisode: Codable, Hashable {
