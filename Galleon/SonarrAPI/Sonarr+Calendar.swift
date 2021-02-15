@@ -7,8 +7,8 @@ import SwiftyJSON
 
 extension SonarrComm {
     public func getCalendar(startDate: Date, endDate: Date, completion: @escaping (_ entries: [SonarrCalendarEntry]?, _ errorDescription: String?) -> Void) {
-        let storedURL = SonarrComm.shared.getServerURLFromStorage() ?? ""
-        let apiKey = SonarrComm.shared.getAPIKeyFromStorage() ?? ""
+        let storedURL = StorageManager.instance.getServerURLFromStorage() ?? ""
+        let apiKey = StorageManager.instance.getAPIKeyFromStorage() ?? ""
         let endpoint = "calendar"
         
         guard let url = SonarrComm.shared.createStandardUrl(serverUrl: storedURL, endpoint: endpoint) else {

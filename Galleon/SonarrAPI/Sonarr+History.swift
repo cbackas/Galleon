@@ -7,8 +7,8 @@ import SwiftyJSON
 
 extension SonarrComm {
     public func getHistory(episodeID: Int? = nil, page: Int? = nil, completion: @escaping (_ entries: SonarrHistory?, _ errorDescription: String?) -> Void) {
-        let storedURL = SonarrComm.shared.getServerURLFromStorage() ?? ""
-        let apiKey = SonarrComm.shared.getAPIKeyFromStorage() ?? ""
+        let storedURL = StorageManager.instance.getServerURLFromStorage() ?? ""
+        let apiKey = StorageManager.instance.getAPIKeyFromStorage() ?? ""
         let endpoint = "history"
         
         guard let url = SonarrComm.shared.createStandardUrl(serverUrl: storedURL, endpoint: endpoint) else {

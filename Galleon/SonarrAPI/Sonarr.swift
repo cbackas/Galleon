@@ -66,8 +66,8 @@ public class SonarrComm: SessionDelegate {
     }
     
     public func getServerStatus(completion: @escaping (_ status: SonarrStatus?, _ errorDescription: String?) -> Void) {
-        let storedURL = SonarrComm.shared.getServerURLFromStorage() ?? ""
-        let apiKey = SonarrComm.shared.getAPIKeyFromStorage() ?? ""
+        let storedURL = StorageManager.instance.getServerURLFromStorage() ?? ""
+        let apiKey = StorageManager.instance.getAPIKeyFromStorage() ?? ""
         let endpoint = "system/status"
         
         guard let url = SonarrComm.shared.createStandardUrl(serverUrl: storedURL, endpoint: endpoint) else {
