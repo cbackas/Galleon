@@ -49,7 +49,7 @@ struct CalendarDayCardView: View {
                 
                 ForEach(episodes, id: \.self) {
                     episode in
-                    MonthEpisodeView(episode: episode, calendarViewModel: calendarViewModel)
+                    CalendarEpisodeView(episode: episode, calendarViewModel: calendarViewModel)
                 }
                 
                 Spacer()
