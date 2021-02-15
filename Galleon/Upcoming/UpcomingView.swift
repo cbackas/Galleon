@@ -80,6 +80,10 @@ struct UpcomingView: View {
                             calendarViewModel.updateData()
                         }
                 }
+                
+                CalendarLegend()
+                    .shadow(radius: 5)
+                
             }
         } // scrollview
     }

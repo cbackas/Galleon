@@ -79,6 +79,18 @@ struct CalendarEpisodeView: View {
                     Text("\(startTime) - \(endTime)")
                         .font(.system(size: 15))
                     Spacer()
+                    if (episode.hasFile!) {
+                        if (episode.episodeFile!.qualityCutoffNotMet!) {
+                            Image(systemName: "bolt.horizontal.fill")
+                                .foregroundColor(.orange)
+                                .font(.system(size: 15))
+                        }
+                    }
+                    if (episode.episodeNumber! == 1) {
+                        Image(systemName: "flag.fill")
+                            .foregroundColor(Color(UIColor.systemTeal))
+                            .font(.system(size: 15))
+                    }
                 }
             }
             .padding(.leading, -55)

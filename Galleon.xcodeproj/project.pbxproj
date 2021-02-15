@@ -44,6 +44,7 @@
 		11B4E83325D9C97000C2EE92 /* CalendarViewModel+Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E83225D9C97000C2EE92 /* CalendarViewModel+Week.swift */; };
 		11B4E83825D9F75E00C2EE92 /* CalendarViewModel+Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E83725D9F75E00C2EE92 /* CalendarViewModel+Forecast.swift */; };
 		11B4E83C25DA1FC800C2EE92 /* CalendarViewModel+Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E83B25DA1FC800C2EE92 /* CalendarViewModel+Day.swift */; };
+		11B4E84725DA4E0B00C2EE92 /* CalendarLegend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E84625DA4E0B00C2EE92 /* CalendarLegend.swift */; };
 		11D76E1E25D452B9003CDE0C /* EpisodeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E1D25D452B9003CDE0C /* EpisodeSheetView.swift */; };
 		11D76E2425D4558D003CDE0C /* CalendarEpisodeViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E2325D4558D003CDE0C /* CalendarEpisodeViewButton.swift */; };
 		11D76E2A25D49E7B003CDE0C /* EpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E2925D49E7B003CDE0C /* EpisodeDetailView.swift */; };
@@ -93,6 +94,12 @@
 		11B4E83225D9C97000C2EE92 /* CalendarViewModel+Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarViewModel+Week.swift"; sourceTree = "<group>"; };
 		11B4E83725D9F75E00C2EE92 /* CalendarViewModel+Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarViewModel+Forecast.swift"; sourceTree = "<group>"; };
 		11B4E83B25DA1FC800C2EE92 /* CalendarViewModel+Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarViewModel+Day.swift"; sourceTree = "<group>"; };
+		11B4E84625DA4E0B00C2EE92 /* CalendarLegend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarLegend.swift; sourceTree = "<group>"; };
+		11B4E84A25DAE8B200C2EE92 /* UpcomingWeekView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpcomingWeekView.png; sourceTree = "<group>"; };
+		11B4E84B25DAE8B200C2EE92 /* EpisodeView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EpisodeView.png; sourceTree = "<group>"; };
+		11B4E84C25DAE8B300C2EE92 /* UpcomingDayView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpcomingDayView.png; sourceTree = "<group>"; };
+		11B4E84D25DAE8B300C2EE92 /* HistoryView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HistoryView.png; sourceTree = "<group>"; };
+		11B4E84E25DAE8B400C2EE92 /* UpcomingMonthView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpcomingMonthView.png; sourceTree = "<group>"; };
 		11D76E1D25D452B9003CDE0C /* EpisodeSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeSheetView.swift; sourceTree = "<group>"; };
 		11D76E2325D4558D003CDE0C /* CalendarEpisodeViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEpisodeViewButton.swift; sourceTree = "<group>"; };
 		11D76E2925D49E7B003CDE0C /* EpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailView.swift; sourceTree = "<group>"; };
@@ -155,6 +162,7 @@
 		11696B5B25CBB2D00066B877 = {
 			isa = PBXGroup;
 			children = (
+				11B4E84925DAE87800C2EE92 /* Assets */,
 				11696B6625CBB2D00066B877 /* Galleon */,
 				11696B6525CBB2D00066B877 /* Products */,
 				FF2EFD208BF1002015094338 /* Pods */,
@@ -258,8 +266,21 @@
 				11696B8725CC7B200066B877 /* CalendarDayCardView.swift */,
 				11157D2E25CE4161002415D3 /* CalendarEpisodeView.swift */,
 				11D76E2325D4558D003CDE0C /* CalendarEpisodeViewButton.swift */,
+				11B4E84625DA4E0B00C2EE92 /* CalendarLegend.swift */,
 			);
 			path = "Calendar Components";
+			sourceTree = "<group>";
+		};
+		11B4E84925DAE87800C2EE92 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				11B4E84B25DAE8B200C2EE92 /* EpisodeView.png */,
+				11B4E84D25DAE8B300C2EE92 /* HistoryView.png */,
+				11B4E84C25DAE8B300C2EE92 /* UpcomingDayView.png */,
+				11B4E84E25DAE8B400C2EE92 /* UpcomingMonthView.png */,
+				11B4E84A25DAE8B200C2EE92 /* UpcomingWeekView.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		11D76E2025D454FD003CDE0C /* Episode */ = {
@@ -415,6 +436,7 @@
 				11B4E81425D8706C00C2EE92 /* ForecastView.swift in Sources */,
 				11696B7B25CBB87F0066B877 /* SettingsView.swift in Sources */,
 				11B4E81125D85D8000C2EE92 /* Color.swift in Sources */,
+				11B4E84725DA4E0B00C2EE92 /* CalendarLegend.swift in Sources */,
 				11B4E83325D9C97000C2EE92 /* CalendarViewModel+Week.swift in Sources */,
 				11696B8425CC711B0066B877 /* MonthView.swift in Sources */,
 				11B4E7F125D6F93100C2EE92 /* EpisodeViewModel.swift in Sources */,
@@ -582,7 +604,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Galleon/Preview Content\"";
 				DEVELOPMENT_TEAM = 3UDJ7Y5C8B;
 				ENABLE_PREVIEWS = YES;
@@ -609,7 +631,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Galleon/Preview Content\"";
 				DEVELOPMENT_TEAM = 3UDJ7Y5C8B;
 				ENABLE_PREVIEWS = YES;

@@ -37,6 +37,7 @@ struct MonthView: View {
             }
             .frame(width: 1850)
             .padding(.horizontal, 40)
+            .padding(.bottom, 80)
             .edgesIgnoringSafeArea(.horizontal)
             .edgesIgnoringSafeArea(.top)
         }

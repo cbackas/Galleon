@@ -23,23 +23,27 @@ struct DayView: View {
     }
     
     var body: some View {
-        ScrollView { // this scrollview improves scroll performance
-            VStack(spacing: 10) {
-                Text(dateHeading)
-                    .font(.headline)
-                    .preferredColorScheme(.dark)
-                    .frame(alignment: .center)
-                ForEach(episodeEntries ?? (calendarViewModel.visibleEntries.first?.episodeEntries ?? []), id: \.self) {
-                    episode in
-                    CalendarEpisodeViewButton(episode: episode, calendarViewModel: calendarViewModel)
+        VStack {
+            ScrollView { // this scrollview improves scroll performance
+                VStack(spacing: 10) {
+                    Text(dateHeading)
+                        .font(.headline)
+                        .preferredColorScheme(.dark)
+                        .frame(alignment: .center)
+                    ForEach(episodeEntries ?? (calendarViewModel.visibleEntries.first?.episodeEntries ?? []), id: \.self) {
+                        episode in
+                        CalendarEpisodeViewButton(episode: episode, calendarViewModel: calendarViewModel)
+                    }
                 }
+                .frame(width: 1850)
+                .padding(.horizontal, 40)
+                .padding(.bottom, 80)
+                .edgesIgnoringSafeArea(.horizontal)
+                .edgesIgnoringSafeArea(.top)
             }
-            .frame(width: 1850)
-            .padding(.horizontal, 40)
-            .padding(.bottom, 80)
-            .edgesIgnoringSafeArea(.horizontal)
-            .edgesIgnoringSafeArea(.top)
-            .navigationTitle(dateHeading)
+            if (date != nil) {
+                CalendarLegend()
+            }
         }
     }
 }
