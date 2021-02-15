@@ -5,6 +5,6 @@ import SwiftUI
 
 struct AgendaView: View {
     var body: some View {
-        Text("Boi")
+        Text("Agenda")
     }
 }

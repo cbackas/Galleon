@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-struct CalendarEpisodeButton: View {
+struct MonthEpisodeButtonView: View {
     var episode: SonarrCalendarEntry
     @ObservedObject var calendarViewModel: CalendarViewModel
     
@@ -13,7 +13,7 @@ struct CalendarEpisodeButton: View {
         Button(action: {
             showEpisodeSheet = true
         }) {
-            CalendarEpisode(episode: episode, calendarViewModel: calendarViewModel)
+            MonthEpisodeView(episode: episode, calendarViewModel: calendarViewModel)
                 .sheet(isPresented: $showEpisodeSheet) {
                     EpisodeSheet(episode: episode)
                 }

@@ -6,80 +6,61 @@ import SwiftUI
 struct UpcomingView: View {
     @ObservedObject var calendarViewModel: CalendarViewModel
     
-    @State var currentView = "calendar"
-    
     var body: some View {
         ScrollView {
             VStack {
                 HStack {
-                    Button(action: {
-                        print("Back")
-                        moveMonth(-1)
-                    }) {
-                        Image(systemName: "chevron.backward.2")
+                    UpcomingPaginator(calendarViewModel: calendarViewModel)
+                    
+                    Button(action: {}) {
+                        Text(calendarViewModel.calendarHeading)
+                            .frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    Button(action: {
-                        print("Today")
-                        moveMonth(nil)
-                    }) {
-                        Text("Today")
-                    }
-                    .buttonStyle(DefaultButtonStyle())
-                    .padding(.horizontal, -20)
-                    Button(action: {
-                        moveMonth(1)
-                    }) {
-                        Image(systemName: "chevron.forward.2")
-                    }
-                    .buttonStyle(PlainButtonStyle())
                     
                     Button(action: {
-                        print("thing")
+                        // cycle through the views
+                        switch (calendarViewModel.selectedView) {
+                        case "month":
+                            calendarViewModel.selectedView = "week"
+                            calendarViewModel.updateWeek()
+                        case "week":
+                            calendarViewModel.selectedView = "forecast"
+                        case "forecast":
+                            calendarViewModel.selectedView = "day"
+                        case "day":
+                            calendarViewModel.selectedView = "agenda"
+                        case "agenda":
+                            calendarViewModel.selectedView = "month"
+                            calendarViewModel.updateMonth()
+                        default:
+                            calendarViewModel.selectedView = "month"
+                            calendarViewModel.updateMonth()
+                        }
+                        
+                        StorageManager.instance.saveUpcomingViewSelection(viewSelection: calendarViewModel.selectedView)
+                        calendarViewModel.calendarSelectedDate = calendarViewModel.getSelectedViewDate(view: calendarViewModel.selectedView)
                     }) {
-                        HStack {
-                            Spacer()
-                            Text(calendarViewModel.calendarHeading)
-                                .font(.headline)
-                            Spacer()
-                        }
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    Button(action: {
-                        if (currentView == "calendar") {
-                            currentView = "agenda"
-                        } else if (currentView == "agenda") {
-                            currentView = "calendar"
-                        }
-                    }) {
-                        if (currentView == "calendar") {
-                            Text("Agenda")
-                        } else if (currentView == "agenda") {
-                            Text("Calendar")
-                        }
+                        Text(calendarViewModel.selectedView.capitalized)
+                            .frame(width: 115)
                     }
                 }
                 .padding(.horizontal, 60)
                 
-                switch currentView {
-                case "calendar":
-                    CalendarView(calendarViewModel: calendarViewModel)
+                switch (calendarViewModel.selectedView) {
+                case "month":
+                    MonthView(calendarViewModel: calendarViewModel)
+                case "week":
+                    WeekView(calendarViewModel: calendarViewModel)
+                case "forecast":
+                    ForecastView(calendarViewModel: calendarViewModel)
+                case "day":
+                    DayView()
                 case "agenda":
                     AgendaView()
                 default:
-                    CalendarView(calendarViewModel: calendarViewModel)
+                    MonthView(calendarViewModel: calendarViewModel)
                 }
             }
         } // scrollview
-    }
-    
-    func moveMonth(_ amount: Int?) {
-        if (amount == nil) {
-            calendarViewModel.calendarMonth = Date()
-        } else {
-            calendarViewModel.calendarMonth = Calendar.current.date(byAdding: .month, value: amount!, to: calendarViewModel.calendarMonth)!
-        }
-        calendarViewModel.updateCalendar()
     }
 }

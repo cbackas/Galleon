@@ -6,58 +6,119 @@ import SwiftUI
 
 final class CalendarViewModel: ObservableObject {
     // calendar view
-    @Published var calendarEntries: [CalDayData] = []
-    @Published var calendarMonth: Date = Date()
+    @Published var visibleEntries: [CalDayData] = []
+    @Published var selectedView: String
+    @Published var calendarSelectedDate: Date = Date()
     @Published var calendarHeading: String = ""
-    @Published var calendarRowHeights = [Int:CGFloat]()
-    @Published var calendarMonthCache = [Date: [CalDayData]]()
-    @Published var calendarMonthRowHeightsCache = [Date: [Int:CGFloat]]()
+    @Published var calendarCache: [CalDayData] = []
     @Published var lastCalendarUpdate: Date = Date()
     
     init() {
-        let date = Date()
-        let startOfMonth = date.startOfMonth!
-        let endOfMonth = date.endOfMonth!
-        let hangingStart = startOfMonth.startOfWeek!
-        let hangingEnd = endOfMonth.endOfWeek!
-        let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
-        self.calendarEntries = allDates.enumerated().map {
-            (index, day) in
-            return CalDayData(date: day, episodeEntries: [], row: (index / 7) + 1)
-        }
-        
+        selectedView = StorageManager.instance.getUpcomingViewSelection()
+        calendarSelectedDate = getSelectedViewDate(view: selectedView)
+
         self.calendarUpdateLoop()
+    }
+    
+    func getSelectedViewDate(view: String) -> Date {
+        switch view {
+        case "month":
+            return Date().startOfMonth!
+        case "week":
+            return Date().startOfWeek!
+        case "forecast":
+            return Date().resetTime!
+//            return Calendar.current.date(byAdding: .day, value: 0, to: Date().resetTime!)!
+        default:
+            return Date().startOfMonth!
+        }
+    }
+    
+    func updateData() -> Void {
+        switch self.selectedView {
+        case "month":
+            self.updateMonth()
+        case "week":
+            self.updateWeek()
+        case "forecast":
+            self.updateForecast()
+        case "day":
+            break
+        case "agenda":
+            break
+        default:
+            break
+        }
     }
     
     // update the calendar every minute
     func calendarUpdateLoop() -> Void {
-//        print("[Keep Alive] Calendar updater")
         DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-            self.updateCalendar()
+            self.updateData()
             self.calendarUpdateLoop()
         }
     }
     
-    func updateCalendarMonthHeading() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "LLLL yyyy"
-        self.calendarHeading = dateFormatter.string(from: self.calendarMonth)
+    func cachedDataToView(dates: [Date]) {
+        var cachedDays = calendarCache.filter {
+            dates.contains($0.date)
+        }
+        // if theres no cached info generate some blank days for them
+        if (cachedDays.count == 0) {
+            cachedDays = dates.enumerated().map {
+                (index, day) in
+                return CalDayData(date: day, episodeEntries: [], row: 1, height: 250)
+            }
+        }
+        visibleEntries = cachedDays
     }
     
-    func updateCalendar() {
-        let date = self.calendarMonth
+    func updateUpcomingHeading() {
+        let dateFormatter = DateFormatter()
         
-        self.updateCalendarMonthHeading()
+        switch self.selectedView {
+        case "month":
+            dateFormatter.dateFormat = "LLLL yyyy"
+            self.calendarHeading = dateFormatter.string(from: self.calendarSelectedDate)
+        case "week":
+            self.calendarHeading = getWeekHeading()
+        case "forecast":
+            self.calendarHeading = getWeekHeading()
+        case "day":
+            dateFormatter.dateFormat = "EEEE, MMM d yyyy"
+            self.calendarHeading = dateFormatter.string(from: self.calendarSelectedDate)
+        case "agenda":
+            self.calendarHeading = "Agenda"
+        default:
+            self.calendarHeading = ""
+        }
+    }
+    
+    func getWeekHeading() -> String {
+        let firstDay = self.visibleEntries.first
+        let lastDay = self.visibleEntries.last
+        let firstDayComponents = Calendar.current.dateComponents([.day, .month, .year], from: firstDay!.date)
+        let lastDayComponents = Calendar.current.dateComponents([.day, .month, .year], from: lastDay!.date)
         
-        let cachedData = self.calendarMonthCache[date] ?? self.calendarEntries
-        self.calendarEntries = cachedData
-        self.calendarRowHeights = self.calendarMonthRowHeightsCache[date] ?? self.calendarRowHeights
+        let monthFormatter = DateFormatter()
+        monthFormatter.dateFormat = "MMM"
         
-        let startOfMonth = date.startOfMonth!
-        let endOfMonth = date.endOfMonth!
-        let hangingStart = startOfMonth.startOfWeek!
-        let hangingEnd = endOfMonth.endOfWeek!
-        SonarrComm.shared.getCalendar(startDate: hangingStart, endDate: hangingEnd) {
+        var heading = "\(monthFormatter.string(from: firstDay!.date)) \(firstDayComponents.day!) - "
+        heading.append(lastDayComponents.month != firstDayComponents.month ? monthFormatter.string(from: lastDay!.date) + " " : "")
+        heading.append("\(lastDayComponents.day!) \(lastDayComponents.year!)")
+        
+        return heading
+    }
+    
+    func updateData(startDate: Date, endDate: Date, completion: @escaping (_ calDayData: [CalDayData]) -> Void) {
+        // list of all the dates shown on the calendar
+        let allDates = Date.datesInRange(from: startDate, to: endDate)
+        
+        self.cachedDataToView(dates: allDates)
+        
+        self.updateUpcomingHeading()
+        
+        SonarrComm.shared.getCalendar(startDate: startDate, endDate: endDate) {
             calendar, errorDescription in
             if (errorDescription != nil) {
                 print("lol error: \(errorDescription!)")
@@ -69,12 +130,9 @@ final class CalendarViewModel: ObservableObject {
                 timeFormatter.timeZone = TimeZone.init(abbreviation: "UTC")
                 timeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
                 
-                // list of all the dates shown on the calendar
-                let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
-                
                 var calendarData = calendar!
                 var calDayData: [CalDayData] = []
-                var newRowHeights = [Int:CGFloat]()
+                var rowHeights = [Int:CGFloat]()
                 
                 // for every day on the cal go through and build out the episodes
                 for (index, calDate) in allDates.enumerated() {
@@ -102,26 +160,97 @@ final class CalendarViewModel: ObservableObject {
                     
                     // calculate the height needed to show these entries and save them on a rowly basis so each row can be the same height
                     let row = (index / 7) + 1
-                    let oldRowHeight = newRowHeights[row] ?? CGFloat(250)
+                    let oldRowHeight = rowHeights[row] ?? CGFloat(250)
                     let newRowHeight = CGFloat(40 + (matchingEntries.count * 75))
                     if (oldRowHeight < newRowHeight) {
-                        newRowHeights[row] = newRowHeight
+                        rowHeights[row] = newRowHeight
                     }
-                    let newCalDayData = CalDayData(date: calDate, episodeEntries: matchingEntries, row: row)
+                    let newCalDayData = CalDayData(date: calDate, episodeEntries: matchingEntries, row: row, height: 250)
+                    
                     calDayData.append(newCalDayData)
                 }
-                // if the data we just recieved is for the page thats still selected
-                if (date == self.calendarMonth) {
-                // update view
-                    self.calendarEntries = calDayData
-                    self.calendarRowHeights = newRowHeights
+                
+                // add height as a value of the data and cache it
+                for index in 0..<calDayData.count {
+                    calDayData[index].height = rowHeights[calDayData[index].row] ?? 250
+                    self.calendarCache.removeAll() {
+                        $0.date == calDayData[index].date
+                    }
+                    self.calendarCache.append(calDayData[index])
                 }
-                self.lastCalendarUpdate = Date()
-                // always cache the data whether we're showing it still or not
-                // update cache
-                self.calendarMonthCache[date] = calDayData
-                self.calendarMonthRowHeightsCache[date] = newRowHeights
+                
+                completion(calDayData)
             }
         }
     }
 }
+
+//    func initSelectedView() -> [CalDayData] {
+//        let today = Date()
+//
+//        switch selectedView {
+//        case "month":
+//            let hangingStart = today.startOfMonth!.startOfWeek!
+//            let hangingEnd = today.endOfMonth!.endOfWeek!
+//            let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
+//            return allDates.enumerated().map {
+//                (index, day) in
+//                return CalDayData(date: day, episodeEntries: [], row: (index / 7) + 1, height: 250)
+//            }
+//        case "week":
+//            let startOfWeek = today.startOfWeek!
+//            let endOfWeek = today.endOfWeek!
+//            let allDates = Date.datesInRange(from: startOfWeek, to: endOfWeek)
+//            return allDates.enumerated().map {
+//                (index, day) in
+//                return CalDayData(date: day, episodeEntries: [], row: 1, height: 250)
+//            }
+//        case "forecast":
+//            initForecast()
+//        case "day":
+//            initDay()
+//        case "agenda":
+//            initAgenda()
+//        default:
+//            break
+//        }
+//    }
+//
+//    func initForecast() {
+//        //        let date = Date()
+//        //        let startOfMonth = date.startOfMonth!
+//        //        let endOfMonth = date.endOfMonth!
+//        //        let hangingStart = startOfMonth.startOfWeek!
+//        //        let hangingEnd = endOfMonth.endOfWeek!
+//        //        let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
+//        //        self.visibleEntries = allDates.enumerated().map {
+//        //            (index, day) in
+//        //            return CalDayData(date: day, episodeEntries: [], row: (index / 7) + 1)
+//        //        }
+//    }
+//
+//    func initDay() {
+//        //        let date = Date()
+//        //        let startOfMonth = date.startOfMonth!
+//        //        let endOfMonth = date.endOfMonth!
+//        //        let hangingStart = startOfMonth.startOfWeek!
+//        //        let hangingEnd = endOfMonth.endOfWeek!
+//        //        let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
+//        //        self.visibleEntries = allDates.enumerated().map {
+//        //            (index, day) in
+//        //            return CalDayData(date: day, episodeEntries: [], row: (index / 7) + 1)
+//        //        }
+//    }
+//
+//    func initAgenda() {
+//        //        let date = Date()
+//        //        let startOfMonth = date.startOfMonth!
+//        //        let endOfMonth = date.endOfMonth!
+//        //        let hangingStart = startOfMonth.startOfWeek!
+//        //        let hangingEnd = endOfMonth.endOfWeek!
+//        //        let allDates = Date.datesInRange(from: hangingStart, to: hangingEnd)
+//        //        self.visibleEntries = allDates.enumerated().map {
+//        //            (index, day) in
+//        //            return CalDayData(date: day, episodeEntries: [], row: (index / 7) + 1)
+//        //        }
+//    }

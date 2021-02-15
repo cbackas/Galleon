@@ -41,7 +41,7 @@ struct GalleonApp: App {
                     // when tabs get changed, update the data
                     switch selection {
                     case "upcoming":
-                        calendarViewModel.updateCalendar()
+                        calendarViewModel.updateData()
                     case "queue":
                         break
                     case "history":

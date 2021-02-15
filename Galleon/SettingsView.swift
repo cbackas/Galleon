@@ -60,7 +60,7 @@ struct SettingsView: View {
                     Text("Test reading things")
                 }
                 Button(action: {
-                    SonarrComm.shared.resetStorage()
+                    StorageManager.instance.resetStorage()
                     sonarrURL = ""
                     apiKey = ""
                     print("Reset the things")
@@ -75,14 +75,14 @@ struct SettingsView: View {
     }
     
     private func loadStoredSettings() -> Void {
-        sonarrURL = SonarrComm.shared.getServerURLFromStorage() ?? ""
-        apiKey = SonarrComm.shared.getAPIKeyFromStorage() ?? ""
+        sonarrURL = StorageManager.instance.getServerURLFromStorage() ?? ""
+        apiKey = StorageManager.instance.getAPIKeyFromStorage() ?? ""
         print("Reading the things: ", sonarrURL, apiKey)
     }
     
     private func saveSettings() -> Void {
-        SonarrComm.shared.saveServerURLToStorage(url: sonarrURL)
-        SonarrComm.shared.saveAPIKeyToStorage(api_key: apiKey)
+        StorageManager.instance.saveServerURLToStorage(url: sonarrURL)
+        StorageManager.instance.saveAPIKeyToStorage(api_key: apiKey)
         print("Tried to save the things")
     }
 }

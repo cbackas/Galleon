@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-struct CalendarDaySheet: View {
+struct MonthDaySheet: View {
     var date: Date
     var episodeEntries: [SonarrCalendarEntry]
     @ObservedObject var calendarViewModel: CalendarViewModel
@@ -28,7 +28,7 @@ struct CalendarDaySheet: View {
                 VStack {
                     ForEach(episodeEntries, id: \.self) {
                         episode in
-                        CalendarEpisodeButton(episode: episode, calendarViewModel: calendarViewModel)
+                        MonthEpisodeButtonView(episode: episode, calendarViewModel: calendarViewModel)
                     }
                     Spacer()
                 }

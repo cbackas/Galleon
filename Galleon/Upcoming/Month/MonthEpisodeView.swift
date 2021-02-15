@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-struct CalendarEpisode: View {
+struct MonthEpisodeView: View {
     var episode: SonarrCalendarEntry
     @ObservedObject var calendarViewModel: CalendarViewModel
     

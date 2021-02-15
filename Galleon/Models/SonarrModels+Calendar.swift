@@ -9,6 +9,7 @@ public struct CalDayData: Hashable {
     let date: Date
     var episodeEntries: [SonarrCalendarEntry]?
     let row: Int
+    var height: CGFloat
     
     public static func == (lhs: CalDayData, rhs: CalDayData) -> Bool {
         return lhs.date == rhs.date

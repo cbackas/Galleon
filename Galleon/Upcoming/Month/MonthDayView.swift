@@ -3,27 +3,26 @@
 
 import SwiftUI
 
-struct CalendarDay: View {
+struct MonthDayView: View {
+    var calData: CalDayData
     @ObservedObject var calendarViewModel: CalendarViewModel
-    
+    var height: CGFloat?
+
     @State private var episodeSelectionMode = false
     
-    var calData: CalDayData
     var dateText = ""
     var isToday = false
     var isCurrentMonth = true
     
     var episodes: [SonarrCalendarEntry] = []
-    var rowHeight: CGFloat = 250
     
-    init(calData: CalDayData, calendarViewModel: CalendarViewModel) {
+    init(calData: CalDayData, calendarViewModel: CalendarViewModel, height: CGFloat? = nil) {
         self.calData = calData
         self.calendarViewModel = calendarViewModel
+        self.height = height
         
         // episode stuff
         episodes = calData.episodeEntries!
-        // row height comes from ViewModel!!!
-        rowHeight = calendarViewModel.calendarRowHeights[calData.row] ?? 250
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd"
@@ -49,15 +48,15 @@ struct CalendarDay: View {
                 
                 ForEach(episodes, id: \.self) {
                     episode in
-                    CalendarEpisode(episode: episode, calendarViewModel: calendarViewModel)
+                    MonthEpisodeView(episode: episode, calendarViewModel: calendarViewModel)
                 }
                 
                 Spacer()
             }
-            .frame(width: 237, height: rowHeight)
+            .frame(width: 237, height: height != nil ? height : calData.height)
         }
         .sheet(isPresented: $episodeSelectionMode) {
-            CalendarDaySheet(date: calData.date, episodeEntries: episodes, calendarViewModel: calendarViewModel)
+            MonthDaySheet(date: calData.date, episodeEntries: episodes, calendarViewModel: calendarViewModel)
         }
         .buttonStyle(CardButtonStyle())
         .animation(.easeInOut(duration: 0.5))
