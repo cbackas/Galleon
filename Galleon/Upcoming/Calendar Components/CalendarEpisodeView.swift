@@ -3,10 +3,10 @@
 
 import SwiftUI
 
-struct MonthEpisodeView: View {
+struct CalendarEpisodeView: View {
     var episode: SonarrCalendarEntry
     @ObservedObject var calendarViewModel: CalendarViewModel
-    
+
     @State var color: Color = Color.gray
     var dateAirDate: Date
     var dateFinishLocal: Date

@@ -2,8 +2,9 @@
 // Using Swift 5.0
 
 import SwiftUI
+import Foundation
 
-struct WeekView: View {
+struct MonthView: View {
     @ObservedObject var calendarViewModel: CalendarViewModel
     
     let columns = [
@@ -31,17 +32,14 @@ struct WeekView: View {
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(calendarViewModel.visibleEntries, id: \.hashValue) {
                     item in
-                    MonthDayView(calData: item, calendarViewModel: calendarViewModel)
+                    CalendarDayCardView(calData: item, calendarViewModel: calendarViewModel)
                 }
             }
             .frame(width: 1850)
             .padding(.horizontal, 40)
-            .padding(.bottom, 80)
             .edgesIgnoringSafeArea(.horizontal)
             .edgesIgnoringSafeArea(.top)
-            .onAppear() {
-                calendarViewModel.updateWeek()
-            }
         }
     }
+    
 }

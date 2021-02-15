@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-struct UpcomingPaginator: View {
+struct CalendarPaginator: View {
     @ObservedObject var calendarViewModel: CalendarViewModel
     
     var body: some View {

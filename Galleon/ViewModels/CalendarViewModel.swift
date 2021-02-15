@@ -28,26 +28,12 @@ final class CalendarViewModel: ObservableObject {
             return Date().startOfWeek!
         case "forecast":
             return Date().resetTime!
-//            return Calendar.current.date(byAdding: .day, value: 0, to: Date().resetTime!)!
+        case "day":
+            return Date().resetTime!
+        case "agenda":
+            return Date().resetTime!
         default:
             return Date().startOfMonth!
-        }
-    }
-    
-    func updateData() -> Void {
-        switch self.selectedView {
-        case "month":
-            self.updateMonth()
-        case "week":
-            self.updateWeek()
-        case "forecast":
-            self.updateForecast()
-        case "day":
-            break
-        case "agenda":
-            break
-        default:
-            break
         }
     }
     
@@ -110,15 +96,44 @@ final class CalendarViewModel: ObservableObject {
         return heading
     }
     
+    func updateData() -> Void {
+        switch self.selectedView {
+        case "month":
+            self.updateMonth()
+        case "week":
+            self.updateWeek()
+        case "forecast":
+            self.updateForecast()
+        case "day":
+            self.updateDay()
+        case "agenda":
+            break
+        default:
+            break
+        }
+    }
+    
     func updateData(startDate: Date, endDate: Date, completion: @escaping (_ calDayData: [CalDayData]) -> Void) {
-        // list of all the dates shown on the calendar
-        let allDates = Date.datesInRange(from: startDate, to: endDate)
+        var apiStartDate = startDate
+        var apiEndDate = endDate
         
-        self.cachedDataToView(dates: allDates)
+        if (startDate == endDate) {
+            apiStartDate = startDate.startOfWeek!
+            apiEndDate = startDate.endOfWeek!
+            
+            self.cachedDataToView(dates: [startDate])
+        }
+        
+        // list of all the dates shown on the calendar
+        let allDates = Date.datesInRange(from: apiStartDate, to: apiEndDate)
+        
+        if (startDate != endDate) {
+            self.cachedDataToView(dates: allDates)
+        }
         
         self.updateUpcomingHeading()
         
-        SonarrComm.shared.getCalendar(startDate: startDate, endDate: endDate) {
+        SonarrComm.shared.getCalendar(startDate: apiStartDate, endDate: apiEndDate) {
             calendar, errorDescription in
             if (errorDescription != nil) {
                 print("lol error: \(errorDescription!)")

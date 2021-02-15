@@ -10,7 +10,7 @@ struct UpcomingView: View {
         ScrollView {
             VStack {
                 HStack {
-                    UpcomingPaginator(calendarViewModel: calendarViewModel)
+                    CalendarPaginator(calendarViewModel: calendarViewModel)
                     
                     Button(action: {}) {
                         Text(calendarViewModel.calendarHeading)
@@ -25,8 +25,10 @@ struct UpcomingView: View {
                             calendarViewModel.updateWeek()
                         case "week":
                             calendarViewModel.selectedView = "forecast"
+                            calendarViewModel.updateForecast()
                         case "forecast":
                             calendarViewModel.selectedView = "day"
+                            calendarViewModel.updateDay()
                         case "day":
                             calendarViewModel.selectedView = "agenda"
                         case "agenda":
@@ -49,16 +51,34 @@ struct UpcomingView: View {
                 switch (calendarViewModel.selectedView) {
                 case "month":
                     MonthView(calendarViewModel: calendarViewModel)
+                        .onAppear() {
+                            calendarViewModel.updateData()
+                        }
                 case "week":
                     WeekView(calendarViewModel: calendarViewModel)
+                        .onAppear() {
+                            calendarViewModel.updateData()
+                        }
                 case "forecast":
                     ForecastView(calendarViewModel: calendarViewModel)
+                        .onAppear() {
+                            calendarViewModel.updateData()
+                        }
                 case "day":
-                    DayView()
+                    DayView(calendarViewModel: calendarViewModel)
+                        .onAppear() {
+                            calendarViewModel.updateData()
+                        }
                 case "agenda":
                     AgendaView()
+                        .onAppear() {
+                            calendarViewModel.updateData()
+                        }
                 default:
                     MonthView(calendarViewModel: calendarViewModel)
+                        .onAppear() {
+                            calendarViewModel.updateData()
+                        }
                 }
             }
         } // scrollview

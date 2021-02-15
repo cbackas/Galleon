@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-struct MonthDayView: View {
+struct CalendarDayCardView: View {
     var calData: CalDayData
     @ObservedObject var calendarViewModel: CalendarViewModel
     var height: CGFloat?
@@ -44,6 +44,7 @@ struct MonthDayView: View {
                         .font(.caption)
                         .padding(.trailing, 5)
                 }
+                .frame(height: 40)
                 .background(isToday ? Color.blue : (isCurrentMonth ? Color(UIColor.lightGray) : Color(UIColor.darkGray)))
                 
                 ForEach(episodes, id: \.self) {
@@ -53,12 +54,12 @@ struct MonthDayView: View {
                 
                 Spacer()
             }
-            .frame(width: 237, height: height != nil ? height : calData.height)
+            .frame(width: 237, height: height ?? calData.height)
         }
         .sheet(isPresented: $episodeSelectionMode) {
-            MonthDaySheet(date: calData.date, episodeEntries: episodes, calendarViewModel: calendarViewModel)
+            DayView(date: calData.date, episodeEntries: episodes, calendarViewModel: calendarViewModel)
         }
         .buttonStyle(CardButtonStyle())
-        .animation(.easeInOut(duration: 0.5))
+        .animation(.easeInOut(duration: 0.25))
     }
 }

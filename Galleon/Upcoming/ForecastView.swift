@@ -2,10 +2,11 @@
 // Using Swift 5.0
 
 import SwiftUI
-import Foundation
 
-struct MonthView: View {
+struct ForecastView: View {
     @ObservedObject var calendarViewModel: CalendarViewModel
+    
+    @State var rowHeight: CGFloat = 250
     
     let columns = [
         GridItem(.flexible()),
@@ -16,7 +17,7 @@ struct MonthView: View {
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
-    let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    let weekdays = ["Yesterday", "Today", "Tomorrow", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var body: some View {
         ScrollView { // this scrollview improves scroll performance
@@ -32,17 +33,20 @@ struct MonthView: View {
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(calendarViewModel.visibleEntries, id: \.hashValue) {
                     item in
-                    MonthDayView(calData: item, calendarViewModel: calendarViewModel)
+                    CalendarDayCardView(calData: item, calendarViewModel: calendarViewModel, height: rowHeight)
                 }
             }
             .frame(width: 1850)
             .padding(.horizontal, 40)
+            .padding(.bottom, 80)
             .edgesIgnoringSafeArea(.horizontal)
             .edgesIgnoringSafeArea(.top)
             .onAppear() {
-                calendarViewModel.updateMonth()
+                rowHeight = calendarViewModel.visibleEntries.map { $0.height }.max() ?? rowHeight
+            }
+            .onChange(of: calendarViewModel.lastCalendarUpdate) {_ in
+                rowHeight = calendarViewModel.visibleEntries.map { $0.height }.max()!
             }
         }
     }
-    
 }
