@@ -137,14 +137,10 @@
 		11157D4125D1D342002415D3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				11B4E7F325D6F96500C2EE92 /* CalendarViewModel.swift */,
-				11B4E82F25D9C4A200C2EE92 /* CalendarViewModel+Month.swift */,
-				11B4E83225D9C97000C2EE92 /* CalendarViewModel+Week.swift */,
-				11B4E83725D9F75E00C2EE92 /* CalendarViewModel+Forecast.swift */,
-				11B4E83B25DA1FC800C2EE92 /* CalendarViewModel+Day.swift */,
 				11B4E7F625D6F9ED00C2EE92 /* HistoryViewModel.swift */,
 				11B4E7F025D6F93100C2EE92 /* EpisodeViewModel.swift */,
 				11B4E7FC25D6FBA900C2EE92 /* QueueViewModel.swift */,
+				11B4E85025DB0BE600C2EE92 /* CalendarViewModel */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -281,6 +277,18 @@
 				11B4E84A25DAE8B200C2EE92 /* UpcomingWeekView.png */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		11B4E85025DB0BE600C2EE92 /* CalendarViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				11B4E7F325D6F96500C2EE92 /* CalendarViewModel.swift */,
+				11B4E82F25D9C4A200C2EE92 /* CalendarViewModel+Month.swift */,
+				11B4E83225D9C97000C2EE92 /* CalendarViewModel+Week.swift */,
+				11B4E83725D9F75E00C2EE92 /* CalendarViewModel+Forecast.swift */,
+				11B4E83B25DA1FC800C2EE92 /* CalendarViewModel+Day.swift */,
+			);
+			path = CalendarViewModel;
 			sourceTree = "<group>";
 		};
 		11D76E2025D454FD003CDE0C /* Episode */ = {
