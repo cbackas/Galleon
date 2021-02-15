@@ -4,17 +4,36 @@
 import Foundation
 
 extension Date {
+    var resetTime: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        var components = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        
+        return gregorian.date(from: components)!
+    }
+        
     var startOfWeek: Date? {
         let gregorian = Calendar(identifier: .gregorian)
-        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else {
+        var components = gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear, .hour, .minute, .second], from: self)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        guard let sunday = gregorian.date(from: components) else {
             return nil
         }
+        
         return gregorian.date(byAdding: .day, value: 0, to: sunday)
     }
     
     var endOfWeek: Date? {
         let gregorian = Calendar(identifier: .gregorian)
-        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else {
+        var components = gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear, .hour, .minute, .second], from: self)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        guard let sunday = gregorian.date(from: components) else {
             return nil
         }
         return gregorian.date(byAdding: .day, value: 6, to: sunday)
@@ -22,7 +41,11 @@ extension Date {
     
     var startOfMonth: Date? {
         let gregorian = Calendar(identifier: .gregorian)
-        guard let firstDate = gregorian.date(from: gregorian.dateComponents([.year, .month], from: self)) else {
+        var components = gregorian.dateComponents([.year, .month, .hour, .minute, .second], from: self)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        guard let firstDate = gregorian.date(from: components) else {
             return nil
         }
         return firstDate
