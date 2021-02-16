@@ -73,6 +73,16 @@ public struct SonarrSeason: Codable, Hashable {
     var monitored: Bool?
 }
 
+// MARK: - SonarrHistoryQuality
+public struct SonarrQuality: Codable, Hashable {
+    var quality: SonarrQualityQuality?
+    var revision: SonarrRevision?
+    
+    public static func == (lhs: SonarrQuality, rhs: SonarrQuality) -> Bool {
+        lhs.quality == rhs.quality && lhs.revision == rhs.revision
+    }
+}
+
 // MARK: - SonarrRevision
 public struct SonarrRevision: Codable, Hashable {
     var version, real: Int?

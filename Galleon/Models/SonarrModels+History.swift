@@ -15,7 +15,7 @@ public struct SonarrHistory: Codable {
 public struct SonarrHistoryRecord: Codable, Hashable {
     var episodeID, seriesID: Int?
     var sourceTitle: String?
-    var quality: SonarrHistoryQuality?
+    var quality: SonarrQuality?
     var qualityCutoffNotMet: Bool?
     var date, eventType: String?
     var data: SonarrData?
@@ -87,15 +87,5 @@ public struct SonarrEpisode: Codable, Hashable {
     
     public static func == (lhs: SonarrEpisode, rhs: SonarrEpisode) -> Bool {
         lhs.id == rhs.id
-    }
-}
-
-// MARK: - SonarrHistoryQuality
-public struct SonarrHistoryQuality: Codable, Hashable {
-    var quality: SonarrQualityQuality?
-    var revision: SonarrRevision?
-    
-    public static func == (lhs: SonarrHistoryQuality, rhs: SonarrHistoryQuality) -> Bool {
-        lhs.quality == rhs.quality && lhs.revision == rhs.revision
     }
 }

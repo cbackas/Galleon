@@ -6,10 +6,10 @@ import Alamofire
 import SwiftyJSON
 
 extension SonarrComm {
-    public func getHistory(episodeID: Int? = nil, page: Int? = nil, completion: @escaping (_ entries: SonarrHistory?, _ errorDescription: String?) -> Void) {
+    public func getQueue(completion: @escaping (_ queueEntries: [SonarrQueueEntry]?, _ errorDescription: String?) -> Void) {
         let storedURL = StorageManager.instance.getServerURLFromStorage() ?? ""
         let apiKey = StorageManager.instance.getAPIKeyFromStorage() ?? ""
-        let endpoint = "history"
+        let endpoint = "queue"
         
         guard let url = SonarrComm.shared.createStandardUrl(serverUrl: storedURL, endpoint: endpoint) else {
             completion(nil, "Invalid server url")
@@ -20,19 +20,6 @@ extension SonarrComm {
         
         var params: [String: Any] = [:]
         params["apikey"] = apiKey
-        if (episodeID != nil) {
-            params["episodeId"] = episodeID
-            params["page"] = 1
-            params["pageSize"] = 100
-        } else if (page != nil) {
-            params["page"] = page
-            params["pageSize"] = 10
-        } else {
-            completion(nil, "Missing episodeID or page")
-            return
-        }
-        params["sortDir"] = "desc"
-        params["sortKey"] = "date"
         
         SonarrComm.shared.sessionManager.request(url, method: method, parameters: params, encoding: URLEncoding.default, interceptor: nil).validate(statusCode: 200..<300).responseJSON { (response) in
 //            debugPrint(response)
@@ -45,7 +32,7 @@ extension SonarrComm {
                     if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
                         let decoder = JSONDecoder()
                         do {
-                            let object = try decoder.decode(SonarrHistory.self, from: Data(jsonResponse.utf8))
+                            let object = try decoder.decode([SonarrQueueEntry].self, from: Data(jsonResponse.utf8))
                             completion(object, nil)
                         } catch {
                             print(error)
@@ -59,4 +46,3 @@ extension SonarrComm {
         }
     }
 }
-

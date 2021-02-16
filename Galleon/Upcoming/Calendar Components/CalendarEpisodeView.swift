@@ -6,18 +6,22 @@ import SwiftUI
 struct CalendarEpisodeView: View {
     var episode: SonarrCalendarEntry
     @ObservedObject var calendarViewModel: CalendarViewModel
-
+    
+    @ObservedObject var queueViewModel: QueueViewModel = QueueViewModel.shared
+    
     @State var color: Color = Color.gray
     var dateAirDate: Date
     var dateFinishLocal: Date
     var startTime: String = ""
     var endTime: String = ""
+    
+    
     @State var hasAppeared: Bool = false
     
     init(episode: SonarrCalendarEntry, calendarViewModel: CalendarViewModel) {
         self.episode = episode
         self.calendarViewModel = calendarViewModel
-
+        
         let utcTimezone = TimeZone.init(abbreviation: "UTC")!
         let localTimezone = TimeZone.autoupdatingCurrent
         
@@ -43,14 +47,19 @@ struct CalendarEpisodeView: View {
     
     func updateColors() {
         let currentTime = Date()
-        if (episode.hasFile!) {
-            color = Color.green
-        } else if (dateFinishLocal <= currentTime) {
-            color = Color.red
-        } else if (dateAirDate <= currentTime) {
-            color = Color.yellow
+        let matchingQueueItems = queueViewModel.queue.filter { $0.episode!.id! == episode.id! && $0.status == "Downloading" }
+        if (matchingQueueItems.count >= 1) {
+            color = Color.purple
         } else {
-            color = Color.blue
+            if (episode.hasFile!) {
+                color = Color.green
+            } else if (dateFinishLocal <= currentTime) {
+                color = Color.red
+            } else if (dateAirDate <= currentTime) {
+                color = Color.yellow
+            } else {
+                color = Color.blue
+            }
         }
     }
     
@@ -78,7 +87,7 @@ struct CalendarEpisodeView: View {
                 HStack {
                     Text("\(startTime) - \(endTime)")
                         .font(.system(size: 15))
-                    Spacer()
+                    Spacer(minLength: 2)
                     if (episode.hasFile!) {
                         if (episode.episodeFile!.qualityCutoffNotMet!) {
                             Image(systemName: "bolt.horizontal.fill")

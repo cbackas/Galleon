@@ -8,7 +8,7 @@ struct GalleonApp: App {
     @Environment(\.scenePhase) private var phase
     
     let calendarViewModel = CalendarViewModel()
-    let queueViewModel = QueueViewModel()
+    let queueViewModel = QueueViewModel.shared
     let historyViewModel = HistoryViewModel()
     @State private var selection = "calendar"
     
@@ -43,7 +43,7 @@ struct GalleonApp: App {
                     case "upcoming":
                         calendarViewModel.updateData()
                     case "queue":
-                        break
+                        queueViewModel.updateData()
                     case "history":
                         historyViewModel.updateHistory(true)
                     default:

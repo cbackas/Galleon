@@ -45,6 +45,10 @@
 		11B4E83825D9F75E00C2EE92 /* CalendarViewModel+Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E83725D9F75E00C2EE92 /* CalendarViewModel+Forecast.swift */; };
 		11B4E83C25DA1FC800C2EE92 /* CalendarViewModel+Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E83B25DA1FC800C2EE92 /* CalendarViewModel+Day.swift */; };
 		11B4E84725DA4E0B00C2EE92 /* CalendarLegend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E84625DA4E0B00C2EE92 /* CalendarLegend.swift */; };
+		11B4E85225DB0CA100C2EE92 /* SonarrModels+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E85125DB0CA100C2EE92 /* SonarrModels+Queue.swift */; };
+		11B4E85625DB0E5100C2EE92 /* Sonarr+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E85525DB0E5100C2EE92 /* Sonarr+Queue.swift */; };
+		11B4E85A25DB115700C2EE92 /* QueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E85925DB115700C2EE92 /* QueueRecord.swift */; };
+		11B4E85D25DB162400C2EE92 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E85C25DB162400C2EE92 /* ProgressBar.swift */; };
 		11D76E1E25D452B9003CDE0C /* EpisodeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E1D25D452B9003CDE0C /* EpisodeSheetView.swift */; };
 		11D76E2425D4558D003CDE0C /* CalendarEpisodeViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E2325D4558D003CDE0C /* CalendarEpisodeViewButton.swift */; };
 		11D76E2A25D49E7B003CDE0C /* EpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E2925D49E7B003CDE0C /* EpisodeDetailView.swift */; };
@@ -100,6 +104,10 @@
 		11B4E84C25DAE8B300C2EE92 /* UpcomingDayView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpcomingDayView.png; sourceTree = "<group>"; };
 		11B4E84D25DAE8B300C2EE92 /* HistoryView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HistoryView.png; sourceTree = "<group>"; };
 		11B4E84E25DAE8B400C2EE92 /* UpcomingMonthView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpcomingMonthView.png; sourceTree = "<group>"; };
+		11B4E85125DB0CA100C2EE92 /* SonarrModels+Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SonarrModels+Queue.swift"; sourceTree = "<group>"; };
+		11B4E85525DB0E5100C2EE92 /* Sonarr+Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonarr+Queue.swift"; sourceTree = "<group>"; };
+		11B4E85925DB115700C2EE92 /* QueueRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecord.swift; sourceTree = "<group>"; };
+		11B4E85C25DB162400C2EE92 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		11D76E1D25D452B9003CDE0C /* EpisodeSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeSheetView.swift; sourceTree = "<group>"; };
 		11D76E2325D4558D003CDE0C /* CalendarEpisodeViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEpisodeViewButton.swift; sourceTree = "<group>"; };
 		11D76E2925D49E7B003CDE0C /* EpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailView.swift; sourceTree = "<group>"; };
@@ -151,6 +159,7 @@
 				11157D1E25CCEDA3002415D3 /* SonarrModels.swift */,
 				11696B7D25CBBB920066B877 /* SonarrModels+Calendar.swift */,
 				11157D3325D07C06002415D3 /* SonarrModels+History.swift */,
+				11B4E85125DB0CA100C2EE92 /* SonarrModels+Queue.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -210,6 +219,7 @@
 				11157D1725CCD49F002415D3 /* Sonarr.swift */,
 				11157D2725CD203D002415D3 /* Sonarr+Calendar.swift */,
 				11157D3925D1D11F002415D3 /* Sonarr+History.swift */,
+				11B4E85525DB0E5100C2EE92 /* Sonarr+Queue.swift */,
 			);
 			path = SonarrAPI;
 			sourceTree = "<group>";
@@ -240,6 +250,7 @@
 		11B4E80C25D8535000C2EE92 /* Components  */ = {
 			isa = PBXGroup;
 			children = (
+				11B4E85C25DB162400C2EE92 /* ProgressBar.swift */,
 				11B4E80D25D8539600C2EE92 /* SegmentedPicker.swift */,
 			);
 			path = "Components ";
@@ -306,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				11D76E3325D4D493003CDE0C /* QueueView.swift */,
+				11B4E85925DB115700C2EE92 /* QueueRecord.swift */,
 			);
 			path = Queue;
 			sourceTree = "<group>";
@@ -446,7 +458,9 @@
 				11B4E81125D85D8000C2EE92 /* Color.swift in Sources */,
 				11B4E84725DA4E0B00C2EE92 /* CalendarLegend.swift in Sources */,
 				11B4E83325D9C97000C2EE92 /* CalendarViewModel+Week.swift in Sources */,
+				11B4E85A25DB115700C2EE92 /* QueueRecord.swift in Sources */,
 				11696B8425CC711B0066B877 /* MonthView.swift in Sources */,
+				11B4E85D25DB162400C2EE92 /* ProgressBar.swift in Sources */,
 				11B4E7F125D6F93100C2EE92 /* EpisodeViewModel.swift in Sources */,
 				11157D2F25CE4162002415D3 /* CalendarEpisodeView.swift in Sources */,
 				11157D3725D0923D002415D3 /* HistoryRecord.swift in Sources */,
@@ -475,8 +489,10 @@
 				11B4E7FD25D6FBA900C2EE92 /* QueueViewModel.swift in Sources */,
 				11696B7E25CBBB920066B877 /* SonarrModels+Calendar.swift in Sources */,
 				11B4E7F425D6F96500C2EE92 /* CalendarViewModel.swift in Sources */,
+				11B4E85225DB0CA100C2EE92 /* SonarrModels+Queue.swift in Sources */,
 				11B4E81A25D9062C00C2EE92 /* DayView.swift in Sources */,
 				11D76E2425D4558D003CDE0C /* CalendarEpisodeViewButton.swift in Sources */,
+				11B4E85625DB0E5100C2EE92 /* Sonarr+Queue.swift in Sources */,
 				11B4E82925D910D700C2EE92 /* StorageManager+Sonarr.swift in Sources */,
 				11157D1F25CCEDA4002415D3 /* SonarrModels.swift in Sources */,
 				11D76E2A25D49E7B003CDE0C /* EpisodeDetailView.swift in Sources */,
