@@ -17,8 +17,9 @@ struct OptionsPopupButton: View {
         
         options.forEach() {
             option in
+            let optionText = option + ((option == selectedOption ? "     ⎷" : ""))
             buttons.append(
-                .default(Text(option)) {
+                .default(Text(optionText)) {
                 self.selectedOption = option
             })
         }

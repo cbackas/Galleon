@@ -9,8 +9,8 @@ struct SeriesListView: View {
     @State var showDisplayModeSelector: Bool = false
     @State var showFilterSelector: Bool = false
     
-    @State var selectedView: String = ""
-    @State var selectedFilter: String = ""
+    @State var selectedView: String = "List"
+    @State var selectedFilter: String = "All"
     
     var body: some View {
         ScrollView {
@@ -22,13 +22,13 @@ struct SeriesListView: View {
                     
                     Spacer()
                     
-                    OptionsPopupButton(title: "View", iconSystemName: "eye.fill", message: "Select desired view style", options: ["List", "Posters", "Overview"], selectedOption: $selectedFilter)
+                    OptionsPopupButton(title: "View", iconSystemName: "eye.fill", message: "Select desired view style", options: ["List", "Posters", "Overview"], selectedOption: $selectedView)
                     OptionsPopupButton(title: "Filter", iconSystemName: "line.horizontal.3.decrease.circle.fill", message: "Select filter mode", options: ["All", "Monitored Only", "Unmonitored Only", "Continuing Only", "Ended Only", "Missing Episodes"], selectedOption: $selectedFilter)
                     
                 }
                 .padding(.horizontal, 40)
                 
-                VStack(spacing: 4) {
+                LazyVStack(spacing: 4) {
                     ForEach(seriesViewModel.seriesList, id: \.self) {
                         series in
                         
@@ -41,5 +41,6 @@ struct SeriesListView: View {
                 }
             }
         }
+        
     }
 }

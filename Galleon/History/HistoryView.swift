@@ -7,8 +7,8 @@ struct HistoryView: View {
     @ObservedObject var historyViewModel: HistoryViewModel
     
     var body: some View {
-        ScrollView {
-            VStack {
+        ScrollView(.vertical, showsIndicators: true) {
+            LazyVStack {
                 HistoryPaginator(historyViewModel: historyViewModel)
                 
                 ForEach(historyViewModel.visibleHistory?.records ?? [], id: \.id) {

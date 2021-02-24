@@ -11,8 +11,7 @@ struct EpisodeHistory: View {
         if (episodeHistory.count == 0) {
             Text("No episode history.")
         } else {
-            VStack {
-                
+            LazyVStack {
                 ScrollView {
                     ForEach(episodeHistory, id: \.id) {
                         entry in
