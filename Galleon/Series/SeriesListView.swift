@@ -26,6 +26,7 @@ struct SeriesListView: View {
                     OptionsPopupButton(title: "Filter", iconSystemName: "line.horizontal.3.decrease.circle.fill", message: "Select filter mode", options: ["All", "Monitored Only", "Unmonitored Only", "Continuing Only", "Ended Only", "Missing Episodes"], selectedOption: $selectedFilter)
                     
                 }
+                .padding(.top, 40)
                 .padding(.horizontal, 40)
                 
                 LazyVStack(spacing: 4) {
