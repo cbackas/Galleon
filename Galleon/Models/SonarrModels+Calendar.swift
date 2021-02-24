@@ -26,7 +26,7 @@ public struct SonarrCalendarEntry: Codable, Hashable {
     var title, airDate, airDateUTC, overview: String?
     var episodeFile: SonarrEpisodeFile?
     var hasFile, monitored, unverifiedSceneNumbering: Bool?
-    var series: SonarrSeries?
+    var series: SonarrEpisodeSeries?
     var id, absoluteEpisodeNumber: Int?
     
     enum CodingKeys: String, CodingKey {

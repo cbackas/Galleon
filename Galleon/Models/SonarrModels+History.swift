@@ -20,7 +20,7 @@ public struct SonarrHistoryRecord: Codable, Hashable {
     var date, eventType: String?
     var data: SonarrData?
     var episode: SonarrEpisode?
-    var series: SonarrSeries?
+    var series: SonarrEpisodeSeries?
     var id: Int?
 
     enum CodingKeys: String, CodingKey {

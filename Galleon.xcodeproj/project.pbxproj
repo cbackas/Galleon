@@ -49,6 +49,12 @@
 		11B4E85625DB0E5100C2EE92 /* Sonarr+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E85525DB0E5100C2EE92 /* Sonarr+Queue.swift */; };
 		11B4E85A25DB115700C2EE92 /* QueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E85925DB115700C2EE92 /* QueueRecord.swift */; };
 		11B4E85D25DB162400C2EE92 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4E85C25DB162400C2EE92 /* ProgressBar.swift */; };
+		11B8199425DF26C300B60C7B /* SeriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B8199325DF26C300B60C7B /* SeriesListView.swift */; };
+		11B8199825DF2E2200B60C7B /* SonarrModels+Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B8199725DF2E2200B60C7B /* SonarrModels+Series.swift */; };
+		11B8199C25DF333900B60C7B /* Sonarr+Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B8199B25DF333900B60C7B /* Sonarr+Series.swift */; };
+		11B819A025DF39DC00B60C7B /* SeriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B8199F25DF39DC00B60C7B /* SeriesViewModel.swift */; };
+		11B819A425DF98AC00B60C7B /* SeriesListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B819A325DF98AC00B60C7B /* SeriesListItemView.swift */; };
+		11B819AB25E5EAA500B60C7B /* OptionsPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B819AA25E5EAA500B60C7B /* OptionsPopup.swift */; };
 		11D76E1E25D452B9003CDE0C /* EpisodeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E1D25D452B9003CDE0C /* EpisodeSheetView.swift */; };
 		11D76E2425D4558D003CDE0C /* CalendarEpisodeViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E2325D4558D003CDE0C /* CalendarEpisodeViewButton.swift */; };
 		11D76E2A25D49E7B003CDE0C /* EpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E2925D49E7B003CDE0C /* EpisodeDetailView.swift */; };
@@ -108,6 +114,12 @@
 		11B4E85525DB0E5100C2EE92 /* Sonarr+Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonarr+Queue.swift"; sourceTree = "<group>"; };
 		11B4E85925DB115700C2EE92 /* QueueRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecord.swift; sourceTree = "<group>"; };
 		11B4E85C25DB162400C2EE92 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		11B8199325DF26C300B60C7B /* SeriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesListView.swift; sourceTree = "<group>"; };
+		11B8199725DF2E2200B60C7B /* SonarrModels+Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SonarrModels+Series.swift"; sourceTree = "<group>"; };
+		11B8199B25DF333900B60C7B /* Sonarr+Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonarr+Series.swift"; sourceTree = "<group>"; };
+		11B8199F25DF39DC00B60C7B /* SeriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesViewModel.swift; sourceTree = "<group>"; };
+		11B819A325DF98AC00B60C7B /* SeriesListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesListItemView.swift; sourceTree = "<group>"; };
+		11B819AA25E5EAA500B60C7B /* OptionsPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPopup.swift; sourceTree = "<group>"; };
 		11D76E1D25D452B9003CDE0C /* EpisodeSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeSheetView.swift; sourceTree = "<group>"; };
 		11D76E2325D4558D003CDE0C /* CalendarEpisodeViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEpisodeViewButton.swift; sourceTree = "<group>"; };
 		11D76E2925D49E7B003CDE0C /* EpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailView.swift; sourceTree = "<group>"; };
@@ -148,6 +160,7 @@
 				11B4E7F625D6F9ED00C2EE92 /* HistoryViewModel.swift */,
 				11B4E7F025D6F93100C2EE92 /* EpisodeViewModel.swift */,
 				11B4E7FC25D6FBA900C2EE92 /* QueueViewModel.swift */,
+				11B8199F25DF39DC00B60C7B /* SeriesViewModel.swift */,
 				11B4E85025DB0BE600C2EE92 /* CalendarViewModel */,
 			);
 			path = ViewModels;
@@ -160,6 +173,7 @@
 				11696B7D25CBBB920066B877 /* SonarrModels+Calendar.swift */,
 				11157D3325D07C06002415D3 /* SonarrModels+History.swift */,
 				11B4E85125DB0CA100C2EE92 /* SonarrModels+Queue.swift */,
+				11B8199725DF2E2200B60C7B /* SonarrModels+Series.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -187,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				11696B6725CBB2D00066B877 /* GalleonApp.swift */,
+				11B8199A25DF323100B60C7B /* Series */,
 				11B4E80C25D8535000C2EE92 /* Components  */,
 				11696B8225CC71030066B877 /* Upcoming */,
 				11157D3125D0788C002415D3 /* History */,
@@ -220,6 +235,7 @@
 				11157D2725CD203D002415D3 /* Sonarr+Calendar.swift */,
 				11157D3925D1D11F002415D3 /* Sonarr+History.swift */,
 				11B4E85525DB0E5100C2EE92 /* Sonarr+Queue.swift */,
+				11B8199B25DF333900B60C7B /* Sonarr+Series.swift */,
 			);
 			path = SonarrAPI;
 			sourceTree = "<group>";
@@ -252,6 +268,7 @@
 			children = (
 				11B4E85C25DB162400C2EE92 /* ProgressBar.swift */,
 				11B4E80D25D8539600C2EE92 /* SegmentedPicker.swift */,
+				11B819AA25E5EAA500B60C7B /* OptionsPopup.swift */,
 			);
 			path = "Components ";
 			sourceTree = "<group>";
@@ -300,6 +317,15 @@
 				11B4E83B25DA1FC800C2EE92 /* CalendarViewModel+Day.swift */,
 			);
 			path = CalendarViewModel;
+			sourceTree = "<group>";
+		};
+		11B8199A25DF323100B60C7B /* Series */ = {
+			isa = PBXGroup;
+			children = (
+				11B8199325DF26C300B60C7B /* SeriesListView.swift */,
+				11B819A325DF98AC00B60C7B /* SeriesListItemView.swift */,
+			);
+			path = Series;
 			sourceTree = "<group>";
 		};
 		11D76E2025D454FD003CDE0C /* Episode */ = {
@@ -454,11 +480,14 @@
 			files = (
 				11D76E3025D49EAC003CDE0C /* EpisodeSearchView.swift in Sources */,
 				11B4E81425D8706C00C2EE92 /* ForecastView.swift in Sources */,
+				11B819A425DF98AC00B60C7B /* SeriesListItemView.swift in Sources */,
 				11696B7B25CBB87F0066B877 /* SettingsView.swift in Sources */,
+				11B8199825DF2E2200B60C7B /* SonarrModels+Series.swift in Sources */,
 				11B4E81125D85D8000C2EE92 /* Color.swift in Sources */,
 				11B4E84725DA4E0B00C2EE92 /* CalendarLegend.swift in Sources */,
 				11B4E83325D9C97000C2EE92 /* CalendarViewModel+Week.swift in Sources */,
 				11B4E85A25DB115700C2EE92 /* QueueRecord.swift in Sources */,
+				11B819AB25E5EAA500B60C7B /* OptionsPopup.swift in Sources */,
 				11696B8425CC711B0066B877 /* MonthView.swift in Sources */,
 				11B4E85D25DB162400C2EE92 /* ProgressBar.swift in Sources */,
 				11B4E7F125D6F93100C2EE92 /* EpisodeViewModel.swift in Sources */,
@@ -468,6 +497,7 @@
 				11B4E82525D9103200C2EE92 /* StorageManager.swift in Sources */,
 				11B4E83C25DA1FC800C2EE92 /* CalendarViewModel+Day.swift in Sources */,
 				11696B7925CBB8740066B877 /* HistoryView.swift in Sources */,
+				11B819A025DF39DC00B60C7B /* SeriesViewModel.swift in Sources */,
 				11D76E3425D4D493003CDE0C /* QueueView.swift in Sources */,
 				11157D3A25D1D11F002415D3 /* Sonarr+History.swift in Sources */,
 				11B4E80E25D8539600C2EE92 /* SegmentedPicker.swift in Sources */,
@@ -476,8 +506,10 @@
 				11B4E83025D9C4A200C2EE92 /* CalendarViewModel+Month.swift in Sources */,
 				11696B8125CBCA770066B877 /* Dates.swift in Sources */,
 				11B4E7F725D6F9ED00C2EE92 /* HistoryViewModel.swift in Sources */,
+				11B8199425DF26C300B60C7B /* SeriesListView.swift in Sources */,
 				11157D4E25D25A7C002415D3 /* HistoryPaginator.swift in Sources */,
 				11157D2825CD203D002415D3 /* Sonarr+Calendar.swift in Sources */,
+				11B8199C25DF333900B60C7B /* Sonarr+Series.swift in Sources */,
 				11696B7725CBB8670066B877 /* UpcomingView.swift in Sources */,
 				11B4E82C25D910E600C2EE92 /* StorageManager+ViewStates.swift in Sources */,
 				11157D1825CCD49F002415D3 /* Sonarr.swift in Sources */,

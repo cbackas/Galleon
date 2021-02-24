@@ -12,7 +12,7 @@ struct CalendarLegend: View {
                     .frame(width: 4, height: 20)
                 Text("Unaired")
                     .padding(.leading, -55)
-                    .font(.system(size: 15))
+                    .font(.system(size: 18))
             }
             HStack {
                 RoundedRectangle(cornerRadius: 4, style: .continuous)
@@ -20,7 +20,7 @@ struct CalendarLegend: View {
                     .frame(width: 4, height: 20)
                 Text("On Air")
                     .padding(.leading, -55)
-                    .font(.system(size: 15))
+                    .font(.system(size: 18))
             }
             HStack {
                 RoundedRectangle(cornerRadius: 4, style: .continuous)
@@ -28,7 +28,7 @@ struct CalendarLegend: View {
                     .frame(width: 4, height: 20)
                 Text("Missing")
                     .padding(.leading, -55)
-                    .font(.system(size: 15))
+                    .font(.system(size: 18))
             }
             HStack {
                 RoundedRectangle(cornerRadius: 4, style: .continuous)
@@ -36,23 +36,23 @@ struct CalendarLegend: View {
                     .frame(width: 4, height: 20)
                 Text("Downloaded")
                     .padding(.leading, -55)
-                    .font(.system(size: 15))
+                    .font(.system(size: 18))
             }
             HStack {
                 Image(systemName: "flag.fill")
                     .foregroundColor(Color(UIColor.systemTeal))
-                    .font(.system(size: 15))
+                    .font(.system(size: 18))
                 Text("Premiere")
                     .padding(.leading, -55)
-                    .font(.system(size: 15))
+                    .font(.system(size: 18))
             }
             HStack {
                 Image(systemName: "bolt.horizontal.fill")
                     .foregroundColor(.orange)
-                    .font(.system(size: 15))
+                    .font(.system(size: 18))
                 Text("Cutoff Not Met")
                     .padding(.leading, -55)
-                    .font(.system(size: 15))
+                    .font(.system(size: 18))
             }
         }
     }

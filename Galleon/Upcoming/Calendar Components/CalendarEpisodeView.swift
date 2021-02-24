@@ -88,7 +88,7 @@ struct CalendarEpisodeView: View {
                     Text("\(startTime) - \(endTime)")
                         .font(.system(size: 15))
                     Spacer(minLength: 2)
-                    if (episode.hasFile!) {
+                    if (episode.hasFile! && episode.episodeFile != nil) {
                         if (episode.episodeFile!.qualityCutoffNotMet!) {
                             Image(systemName: "bolt.horizontal.fill")
                                 .foregroundColor(.orange)

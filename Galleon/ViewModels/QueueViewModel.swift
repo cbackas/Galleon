@@ -5,7 +5,7 @@ import Foundation
 
 final class QueueViewModel: ObservableObject {
     @Published var queue: [SonarrQueueEntry] = []
-    @Published var lastQueued: Date = Date()
+    @Published var lastUpdated: Date = Date()
     
     public static let shared: QueueViewModel = {
         let instance = QueueViewModel()
@@ -32,7 +32,7 @@ final class QueueViewModel: ObservableObject {
             } else {
                 self.queue = queue!
 
-                self.lastQueued = Date()
+                self.lastUpdated = Date()
             }
         }
     }

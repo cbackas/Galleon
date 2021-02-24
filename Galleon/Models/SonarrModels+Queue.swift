@@ -5,7 +5,7 @@ import Foundation
 
 // MARK: - SonarrQueueElement
 public struct SonarrQueueEntry: Codable, Hashable, Identifiable {
-    var series: SonarrSeries?
+    var series: SonarrEpisodeSeries?
     var episode: SonarrEpisode?
     var quality: SonarrQuality?
     var size: Int?

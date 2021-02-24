@@ -15,7 +15,7 @@ public struct SonarrStatus: Codable {
 }
 
 // MARK: - SonarrSeries
-public struct SonarrSeries: Codable, Hashable {
+public struct SonarrEpisodeSeries: Codable, Hashable {
     var title, sortTitle: String?
     var seasonCount: Int?
     var status, overview, network, airTime: String?
@@ -28,7 +28,8 @@ public struct SonarrSeries: Codable, Hashable {
     var runtime, tvdbID, tvRageID, tvMazeID: Int?
     var firstAired, lastInfoSync, seriesType, cleanTitle: String?
     var imdbID, titleSlug, certification: String?
-    var genres, tags: [String]?
+    var genres: [String]?
+    var tags: [Int]?
     var added: String?
     var ratings: SonarrRatings?
     var qualityProfileID, id: Int?

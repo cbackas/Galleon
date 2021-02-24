@@ -135,7 +135,7 @@ struct QueueRecord: View {
         .onAppear() {
             updateData()
         }
-        .onChange(of: queueViewModel.lastQueued) {
+        .onChange(of: queueViewModel.lastUpdated) {
             _ in
             updateData()
         }
