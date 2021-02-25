@@ -4,11 +4,11 @@
 import SwiftUI
 
 struct TabButton<Content: View>: View {
-    var selected: Bool
+    var selected: Bool?
     var content: Content
     var action: () -> Void
     
-    init(selected: Bool, action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+    init(selected: Bool? = nil, action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
         self.selected = selected
         self.action = action
         self.content = content()
@@ -20,10 +20,13 @@ struct TabButton<Content: View>: View {
         }) {
             VStack {
                 content
+                    .padding(.top, 10)
                     .padding(.bottom, -20)
-                RoundedRectangle(cornerRadius: 4, style: .continuous)
-                    .fill(selected ? Color.primary : Color.primary.opacity(0))
-                    .frame(width: 120, height: 4, alignment: .center)
+                if (selected != nil) {
+                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                        .fill(selected! ? Color.primary : Color.primary.opacity(0))
+                        .frame(width: 120, height: 4, alignment: .center)
+                }
             }
             .padding(10)
         }
