@@ -14,15 +14,19 @@ struct RootView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Group {
-                    HStack {
+                HStack {
+                    HStack(spacing: 40) {
                         Button(action: {
                             print("SEARCH")
                         }) {
                             Image(systemName: "magnifyingglass")
+                                .font(.system(size: 35))
                                 .padding(10)
+                                .ignoresSafeArea()
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .padding(.leading, 35)
+                        
                         TabButton(selected: selection == "series", action: {
                             selection = "series"
                         }) {
@@ -52,11 +56,13 @@ struct RootView: View {
                         Spacer()
                         
                         CurrentTime()
+                            .padding(.trailing, 35)
                     }
-                    .padding(35)
                 }
-                .frame(width: 1920)
+                .frame(width: 1920, height: 150, alignment: .center)
+                .padding(.bottom, 0)
                 .ignoresSafeArea()
+                .border(Color.red)
                 .onChange(of: selection) { _ in
                     // when tabs get changed, update the data
                     switch selection {
@@ -92,5 +98,6 @@ struct RootView: View {
                 }
             }
         }
+        .ignoresSafeArea()
     }
 }

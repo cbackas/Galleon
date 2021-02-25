@@ -13,22 +13,22 @@ struct SeriesListView: View {
     @State var selectedFilter: String = "All"
     
     var body: some View {
-        ScrollView {
-            VStack {
-                HStack {
-                    Button(action: {} ) {
-                        Image(systemName: "arrow.clockwise")
-                    }
-                    
-                    Spacer()
-                    
-                    OptionsPopupButton(title: "View", iconSystemName: "eye.fill", message: "Select desired view style", options: ["List", "Posters", "Overview"], selectedOption: $selectedView)
-                    OptionsPopupButton(title: "Filter", iconSystemName: "line.horizontal.3.decrease.circle.fill", message: "Select filter mode", options: ["All", "Monitored Only", "Unmonitored Only", "Continuing Only", "Ended Only", "Missing Episodes"], selectedOption: $selectedFilter)
-                    
+        VStack {
+            HStack {
+                Button(action: {} ) {
+                    Image(systemName: "arrow.clockwise")
                 }
-                .padding(.top, 40)
-                .padding(.horizontal, 40)
                 
+                Spacer()
+                
+                OptionsPopupButton(title: "View", iconSystemName: "eye.fill", message: "Select desired view style", options: ["List", "Posters", "Overview"], selectedOption: $selectedView)
+                OptionsPopupButton(title: "Filter", iconSystemName: "line.horizontal.3.decrease.circle.fill", message: "Select filter mode", options: ["All", "Monitored Only", "Unmonitored Only", "Continuing Only", "Ended Only", "Missing Episodes"], selectedOption: $selectedFilter)
+                
+            }
+            .padding(.top, 10)
+            .padding(.horizontal, 40)
+            
+            ZStack {
                 LazyVStack(spacing: 4) {
                     ForEach(seriesViewModel.seriesList, id: \.self) {
                         series in
@@ -36,12 +36,22 @@ struct SeriesListView: View {
                         if (series != seriesViewModel.seriesList.first) {
                             Divider()
                         }
-                        
                         SeriesListItemView(series: series)
                     }
                 }
+                GeometryReader { proxy in
+                    let offset = proxy.frame(in: .named("scroll")).minY
+                    Color.clear.preference(key: ViewOffsetKey.self, value: offset)
+                }
             }
         }
-        
+    }
+}
+
+struct ViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
     }
 }
