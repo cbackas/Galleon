@@ -4,6 +4,7 @@
 import SwiftUI
 
 struct RootView: View {
+    // do i even need these here
     @StateObject var seriesViewModel = SeriesViewModel.shared
     @StateObject var calendarViewModel = CalendarViewModel.shared
     @StateObject var queueViewModel = QueueViewModel.shared
@@ -18,6 +19,7 @@ struct RootView: View {
                     .border(Color.red)
                 
                 SelectedView
+                    .border(Color.orange)
             }
         }
         .ignoresSafeArea()
@@ -35,7 +37,6 @@ struct RootView: View {
             HistoryView()
         case "settings":
             SettingsView()
-                .border(Color.orange)
         default:
             SeriesListView()
         }

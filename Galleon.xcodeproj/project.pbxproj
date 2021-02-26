@@ -223,6 +223,7 @@
 			children = (
 				11696B6725CBB2D00066B877 /* GalleonApp.swift */,
 				11B819AF25E626BC00B60C7B /* RootView.swift */,
+				11696B7A25CBB87F0066B877 /* SettingsView.swift */,
 				11B8199A25DF323100B60C7B /* Series */,
 				11B4E80C25D8535000C2EE92 /* Components  */,
 				11696B8225CC71030066B877 /* Upcoming */,
@@ -237,7 +238,6 @@
 				11696B6B25CBB2D30066B877 /* Assets.xcassets */,
 				11696B7025CBB2D30066B877 /* Info.plist */,
 				11696B6D25CBB2D30066B877 /* Preview Content */,
-				11696B7A25CBB87F0066B877 /* SettingsView.swift */,
 			);
 			path = Galleon;
 			sourceTree = "<group>";
