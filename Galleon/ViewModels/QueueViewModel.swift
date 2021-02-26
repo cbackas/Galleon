@@ -7,14 +7,14 @@ final class QueueViewModel: ObservableObject {
     @Published var queue: [SonarrQueueEntry] = []
     @Published var lastUpdated: Date = Date()
     
+    init() {
+        queueUpdateLoop()
+    }
+    
     public static let shared: QueueViewModel = {
         let instance = QueueViewModel()
         return instance
     }()
-    
-    init() {
-        queueUpdateLoop()
-    }
     
     // update the calendar every minute
     func queueUpdateLoop() -> Void {

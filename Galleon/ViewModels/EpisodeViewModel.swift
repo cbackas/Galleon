@@ -13,10 +13,10 @@ final class EpisodeViewModel: ObservableObject {
         updateHistory(true)
     }
     
-//    public static let shared: EpisodeViewModel = {
-//        let instance = EpisodeViewModel()
-//        return instance
-//    }()
+    public static let shared: EpisodeViewModel = {
+        let instance = EpisodeViewModel()
+        return instance
+    }()
     
     func updateHistory(_ useIndicator: Bool?) {
         self.historyLoading = false

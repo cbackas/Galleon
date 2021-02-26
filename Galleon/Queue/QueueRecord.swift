@@ -6,7 +6,7 @@ import SwiftUI
 struct QueueRecord: View {
     var id: Int
     @State var record: SonarrQueueEntry? = nil
-    @ObservedObject var queueViewModel: QueueViewModel
+    @ObservedObject var queueVM = QueueViewModel.shared
     
     @State var everythingReady: Bool = false
     @State var seriesTitle: String = ""
@@ -41,7 +41,7 @@ struct QueueRecord: View {
         
         everythingReady = false
         
-        record = queueViewModel.queue.first { $0.id == id }
+        record = queueVM.queue.first { $0.id == id }
         seriesTitle = record?.series?.title ?? ""
         seasonNum = numFormatter.string(for: record?.episode?.seasonNumber ?? 0)!
         episodeNum = numFormatter.string(for: record?.episode?.episodeNumber ?? 0)!
@@ -135,7 +135,7 @@ struct QueueRecord: View {
         .onAppear() {
             updateData()
         }
-        .onChange(of: queueViewModel.lastUpdated) {
+        .onChange(of: queueVM.lastUpdated) {
             _ in
             updateData()
         }

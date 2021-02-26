@@ -17,6 +17,11 @@ final class HistoryViewModel: ObservableObject {
         self.historyUpdateLoop()
     }
     
+    public static let shared: HistoryViewModel = {
+        let instance = HistoryViewModel()
+        return instance
+    }()
+    
     // update the history data every 2 minutes
     func historyUpdateLoop() -> Void {
 //        print("[Keep Alive] History updater")

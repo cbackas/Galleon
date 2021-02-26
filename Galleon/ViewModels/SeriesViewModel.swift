@@ -12,6 +12,11 @@ class SeriesViewModel: ObservableObject {
         self.seriesUpdateLoop()
     }
     
+    public static let shared: SeriesViewModel = {
+        let instance = SeriesViewModel()
+        return instance
+    }()
+    
     // update the series data every 5 minutes
     func seriesUpdateLoop() -> Void {
         DispatchQueue.main.asyncAfter(deadline: .now() + (60*5)) {

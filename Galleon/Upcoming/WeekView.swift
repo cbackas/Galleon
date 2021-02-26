@@ -4,7 +4,7 @@
 import SwiftUI
 
 struct WeekView: View {
-    @ObservedObject var calendarViewModel: CalendarViewModel
+    @ObservedObject var calVM = CalendarViewModel.shared
     
     let columns = [
         GridItem(.flexible()),
@@ -29,9 +29,9 @@ struct WeekView: View {
             Divider()
             
             LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(calendarViewModel.visibleEntries, id: \.hashValue) {
+                ForEach(calVM.visibleEntries, id: \.hashValue) {
                     item in
-                    CalendarDayCardView(calData: item, calendarViewModel: calendarViewModel)
+                    CalendarDayCardView(calData: item)
                 }
             }
             .frame(width: 1850)

@@ -4,7 +4,7 @@
 import SwiftUI
 
 struct ForecastView: View {
-    @ObservedObject var calendarViewModel: CalendarViewModel
+    @ObservedObject var calVM = CalendarViewModel.shared
     
     @State var rowHeight: CGFloat = 250
     
@@ -31,9 +31,9 @@ struct ForecastView: View {
             Divider()
             
             LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(calendarViewModel.visibleEntries, id: \.hashValue) {
+                ForEach(calVM.visibleEntries, id: \.hashValue) {
                     item in
-                    CalendarDayCardView(calData: item, calendarViewModel: calendarViewModel, height: rowHeight)
+                    CalendarDayCardView(calData: item, height: rowHeight)
                 }
             }
             .frame(width: 1850)
@@ -42,10 +42,10 @@ struct ForecastView: View {
             .edgesIgnoringSafeArea(.horizontal)
             .edgesIgnoringSafeArea(.top)
             .onAppear() {
-                rowHeight = calendarViewModel.visibleEntries.map { $0.height }.max() ?? rowHeight
+                rowHeight = calVM.visibleEntries.map { $0.height }.max() ?? rowHeight
             }
-            .onChange(of: calendarViewModel.lastCalendarUpdate) {_ in
-                rowHeight = calendarViewModel.visibleEntries.map { $0.height }.max()!
+            .onChange(of: calVM.lastCalendarUpdate) {_ in
+                rowHeight = calVM.visibleEntries.map { $0.height }.max()!
             }
         }
     }

@@ -4,87 +4,81 @@
 import SwiftUI
 
 struct UpcomingView: View {
-    @ObservedObject var calendarViewModel: CalendarViewModel
+    @ObservedObject var calVM = CalendarViewModel.shared
     
     var body: some View {
         ScrollView {
             VStack {
                 HStack {
-                    CalendarPaginator(calendarViewModel: calendarViewModel)
+                    CalendarPaginator()
                     
+                    // wide button to make swiping up easier
                     Button(action: {}) {
-                        Text(calendarViewModel.calendarHeading)
+                        Text(calVM.calendarHeading)
                             .frame(maxWidth: .infinity)
                     }
                     
-                    Button(action: {
-                        // cycle through the views
-                        switch (calendarViewModel.selectedView) {
-                        case "month":
-                            calendarViewModel.selectedView = "week"
-                            calendarViewModel.updateWeek()
-                        case "week":
-                            calendarViewModel.selectedView = "forecast"
-                            calendarViewModel.updateForecast()
-                        case "forecast":
-                            calendarViewModel.selectedView = "day"
-                            calendarViewModel.updateDay()
-                        case "day":
-                            calendarViewModel.selectedView = "agenda"
-                        case "agenda":
-                            calendarViewModel.selectedView = "month"
-                            calendarViewModel.updateMonth()
-                        default:
-                            calendarViewModel.selectedView = "month"
-                            calendarViewModel.updateMonth()
-                        }
-                        
-                        StorageManager.instance.saveUpcomingViewSelection(viewSelection: calendarViewModel.selectedView)
-                        calendarViewModel.calendarSelectedDate = calendarViewModel.getSelectedViewDate(view: calendarViewModel.selectedView)
-                    }) {
-                        Text(calendarViewModel.selectedView.capitalized)
+                    // button to cycle between calendar views
+                    Button(action: calendarTypeButtonAction) {
+                        Text(calVM.selectedView.capitalized)
                             .frame(width: 115)
                     }
                 }
                 .padding(.horizontal, 60)
                 
-                switch (calendarViewModel.selectedView) {
-                case "month":
-                    MonthView(calendarViewModel: calendarViewModel)
-                        .onAppear() {
-                            calendarViewModel.updateData()
-                        }
-                case "week":
-                    WeekView(calendarViewModel: calendarViewModel)
-                        .onAppear() {
-                            calendarViewModel.updateData()
-                        }
-                case "forecast":
-                    ForecastView(calendarViewModel: calendarViewModel)
-                        .onAppear() {
-                            calendarViewModel.updateData()
-                        }
-                case "day":
-                    DayView(calendarViewModel: calendarViewModel)
-                        .onAppear() {
-                            calendarViewModel.updateData()
-                        }
-                case "agenda":
-                    AgendaView()
-                        .onAppear() {
-                            calendarViewModel.updateData()
-                        }
-                default:
-                    MonthView(calendarViewModel: calendarViewModel)
-                        .onAppear() {
-                            calendarViewModel.updateData()
-                        }
-                }
+                SelecatedCalendarView
+                    .onAppear() {
+                        calVM.updateData()
+                    }
                 
                 CalendarLegend()
                     .shadow(radius: 5)
                 
             }
         } // scrollview
+    }
+    
+    @ViewBuilder var SelecatedCalendarView: some View {
+            switch (calVM.selectedView) {
+            case "month":
+                MonthView()
+            case "week":
+                WeekView()
+            case "forecast":
+                ForecastView()
+            case "day":
+                DayView()
+            case "agenda":
+                AgendaView()
+            default:
+                MonthView()
+            }
+    }
+    
+    func calendarTypeButtonAction() {
+        // cycle through the views
+        switch (calVM.selectedView) {
+        case "month":
+            calVM.selectedView = "week"
+            calVM.updateWeek()
+        case "week":
+            calVM.selectedView = "forecast"
+            calVM.updateForecast()
+        case "forecast":
+            calVM.selectedView = "day"
+            calVM.updateDay()
+        case "day":
+            calVM.selectedView = "agenda"
+        case "agenda":
+            calVM.selectedView = "month"
+            calVM.updateMonth()
+        default:
+            calVM.selectedView = "month"
+            calVM.updateMonth()
+        }
+        
+        // save change to view/storage
+        StorageManager.instance.saveUpcomingViewSelection(viewSelection: calVM.selectedView)
+        calVM.calendarSelectedDate = calVM.getSelectedViewDate(view: calVM.selectedView)
     }
 }

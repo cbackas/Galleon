@@ -4,19 +4,19 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @ObservedObject var historyViewModel: HistoryViewModel
+    @ObservedObject var historyVM = HistoryViewModel.shared
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             LazyVStack {
-                HistoryPaginator(historyViewModel: historyViewModel)
+                HistoryPaginator()
                 
-                ForEach(historyViewModel.visibleHistory?.records ?? [], id: \.id) {
+                ForEach(historyVM.visibleHistory?.records ?? [], id: \.id) {
                     entry in
                     HistoryRecord(record: entry)
                 }
                 
-                HistoryPaginator(historyViewModel: historyViewModel)
+                HistoryPaginator()
             }
         } // scrollview
     }

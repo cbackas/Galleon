@@ -4,7 +4,7 @@
 import SwiftUI
 
 struct SeriesListView: View {
-    @ObservedObject var seriesViewModel: SeriesViewModel
+    @ObservedObject var seriesVM = SeriesViewModel.shared
     
     @State var showDisplayModeSelector: Bool = false
     @State var showFilterSelector: Bool = false
@@ -30,10 +30,10 @@ struct SeriesListView: View {
             
             ZStack {
                 LazyVStack(spacing: 4) {
-                    ForEach(seriesViewModel.seriesList, id: \.self) {
+                    ForEach(seriesVM.seriesList, id: \.self) {
                         series in
                         
-                        if (series != seriesViewModel.seriesList.first) {
+                        if (series != seriesVM.seriesList.first) {
                             Divider()
                         }
                         SeriesListItemView(series: series)

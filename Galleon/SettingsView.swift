@@ -8,66 +8,70 @@ struct SettingsView: View {
     @State var apiKey: String = ""
     
     var body: some View {
-        Form {
-            Section(header: Text("Sonarr")) {
-                VStack {
-                    TextField("Sonarr URL", text: $sonarrURL, onEditingChanged: { _ in
-                    }, onCommit: {
-                        saveSettings()
-                    })
-                    HStack {
-                        Text("http://<IP_ADDR>:<PORT>")
-                            .font(.caption2)
-                        Spacer()
-                    }
-                }
-                
-                VStack {
-                    TextField("API Key", text: $apiKey, onEditingChanged: { _ in
-                    }, onCommit: {
-                        saveSettings()
-                    })
-                    HStack {
-                        Text("Found in Settings -> General -> Security")
-                            .font(.caption2)
-                        Spacer()
-                    }
-                }
-                
-                Button(action: {
-                    SonarrComm.shared.getServerStatus() {
-                        sonarrStatus, errorDescription in
-                        if (errorDescription != nil) {
-                            print("lol error: \(errorDescription!)")
-                        } else {
-                            print(sonarrStatus!)
+        VStack {
+            Text("BBBBBBBBewbs")
+            Form {
+                Section(header: Text("Sonarr")) {
+                    VStack {
+                        TextField("Sonarr URL", text: $sonarrURL, onEditingChanged: { _ in
+                        }, onCommit: {
+                            saveSettings()
+                        })
+                        HStack {
+                            Text("http://<IP_ADDR>:<PORT>")
+                                .font(.caption2)
+                            Spacer()
                         }
                     }
-                }) {
-                    Text("Test Sonarr Connection")
+                    
+                    VStack {
+                        TextField("API Key", text: $apiKey, onEditingChanged: { _ in
+                        }, onCommit: {
+                            saveSettings()
+                        })
+                        HStack {
+                            Text("Found in Settings -> General -> Security")
+                                .font(.caption2)
+                            Spacer()
+                        }
+                    }
+                    
+                    Button(action: {
+                        SonarrComm.shared.getServerStatus() {
+                            sonarrStatus, errorDescription in
+                            if (errorDescription != nil) {
+                                print("lol error: \(errorDescription!)")
+                            } else {
+                                print(sonarrStatus!)
+                            }
+                        }
+                    }) {
+                        Text("Test Sonarr Connection")
+                    }
+                }
+                
+                Section(header: Text("Tests")) {
+                    Button(action: {
+                        saveSettings()
+                    }) {
+                        Text("Test saving things")
+                    }
+                    Button(action: {
+                        loadStoredSettings()
+                    }) {
+                        Text("Test reading things")
+                    }
+                    Button(action: {
+                        StorageManager.instance.resetStorage()
+                        sonarrURL = ""
+                        apiKey = ""
+                        print("Reset the things")
+                    }) {
+                        Text("Test resetting things")
+                    }
                 }
             }
-            
-            Section(header: Text("Tests")) {
-                Button(action: {
-                    saveSettings()
-                }) {
-                    Text("Test saving things")
-                }
-                Button(action: {
-                    loadStoredSettings()
-                }) {
-                    Text("Test reading things")
-                }
-                Button(action: {
-                    StorageManager.instance.resetStorage()
-                    sonarrURL = ""
-                    apiKey = ""
-                    print("Reset the things")
-                }) {
-                    Text("Test resetting things")
-                }
-            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onAppear() {
             loadStoredSettings()

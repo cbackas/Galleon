@@ -20,6 +20,11 @@ final class CalendarViewModel: ObservableObject {
         self.calendarUpdateLoop()
     }
     
+    public static let shared: CalendarViewModel = {
+        let instance = CalendarViewModel()
+        return instance
+    }()
+    
     func getSelectedViewDate(view: String) -> Date {
         switch view {
         case "month":

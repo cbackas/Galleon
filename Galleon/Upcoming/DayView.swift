@@ -6,15 +6,15 @@ import SwiftUI
 struct DayView: View {
     var date: Date?
     var episodeEntries: [SonarrCalendarEntry]?
-    @ObservedObject var calendarViewModel: CalendarViewModel
+    
+    @ObservedObject var calVM = CalendarViewModel.shared
     
     var dateFormatter = DateFormatter()
     var dateHeading = ""
     
-    init(date: Date? = nil, episodeEntries: [SonarrCalendarEntry]? = nil, calendarViewModel: CalendarViewModel) {
+    init(date: Date? = nil, episodeEntries: [SonarrCalendarEntry]? = nil) {
         self.date = date
         self.episodeEntries = episodeEntries
-        self.calendarViewModel = calendarViewModel
         
         if (date != nil) {
             dateFormatter.dateFormat = "EEEE, MMM d yyyy"
@@ -30,9 +30,9 @@ struct DayView: View {
                         .font(.headline)
                         .preferredColorScheme(.dark)
                         .frame(alignment: .center)
-                    ForEach(episodeEntries ?? (calendarViewModel.visibleEntries.first?.episodeEntries ?? []), id: \.self) {
+                    ForEach(episodeEntries ?? (calVM.visibleEntries.first?.episodeEntries ?? []), id: \.self) {
                         episode in
-                        CalendarEpisodeViewButton(episode: episode, calendarViewModel: calendarViewModel)
+                        CalendarEpisodeViewButton(episode: episode)
                     }
                 }
                 .frame(width: 1850)

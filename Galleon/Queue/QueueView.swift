@@ -4,10 +4,10 @@
 import SwiftUI
 
 struct QueueView: View {
-    @ObservedObject var queueViewModel: QueueViewModel
+    @ObservedObject var queueVM = QueueViewModel.shared
     
     var body: some View {
-        if (queueViewModel.queue.isEmpty) {
+        if (queueVM.queue.isEmpty) {
             Text("Queue is empty")
         } else {
             ScrollView {
@@ -18,12 +18,12 @@ struct QueueView: View {
                         .frame(alignment: .center)
                         .padding(.bottom, 30)
                     
-                    ForEach(queueViewModel.queue) {
+                    ForEach(queueVM.queue) {
                         entry in
-                        if (entry != queueViewModel.queue.first) {
+                        if (entry != queueVM.queue.first) {
                             Divider()
                         }
-                        QueueRecord(id: entry.id!, queueViewModel: queueViewModel)
+                        QueueRecord(id: entry.id!)
                     }
                 }
                 .padding(60)

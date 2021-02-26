@@ -3,8 +3,9 @@
 
 import SwiftUI
 
+/// Used to translate selected calendar date forward and backwards for displaying calendar data
 struct CalendarPaginator: View {
-    @ObservedObject var calendarViewModel: CalendarViewModel
+    @ObservedObject var calVM = CalendarViewModel.shared
     
     var body: some View {
         Button(action: {
@@ -31,42 +32,42 @@ struct CalendarPaginator: View {
     }
     
     func pageBack(_ amount: Int?) {
-        switch (calendarViewModel.selectedView) {
+        switch (calVM.selectedView) {
         case "month":
             if (amount == nil) {
-                calendarViewModel.calendarSelectedDate = Date().startOfMonth!
+                calVM.calendarSelectedDate = Date().startOfMonth!
             } else {
-                calendarViewModel.calendarSelectedDate = Calendar.current.date(byAdding: .month, value: amount!, to: calendarViewModel.calendarSelectedDate)!
+                calVM.calendarSelectedDate = Calendar.current.date(byAdding: .month, value: amount!, to: calVM.calendarSelectedDate)!
             }
         case "week":
             if (amount == nil) {
-                calendarViewModel.calendarSelectedDate = Date().startOfWeek!
+                calVM.calendarSelectedDate = Date().startOfWeek!
             } else {
-                calendarViewModel.calendarSelectedDate = Calendar.current.date(byAdding: .day, value: amount! * 7, to: calendarViewModel.calendarSelectedDate)!
+                calVM.calendarSelectedDate = Calendar.current.date(byAdding: .day, value: amount! * 7, to: calVM.calendarSelectedDate)!
             }
         case "forecast":
             if (amount == nil) {
-                calendarViewModel.calendarSelectedDate = Date().resetTime!
+                calVM.calendarSelectedDate = Date().resetTime!
             } else {
-                calendarViewModel.calendarSelectedDate = Calendar.current.date(byAdding: .day, value: amount! * 7, to: calendarViewModel.calendarSelectedDate)!
+                calVM.calendarSelectedDate = Calendar.current.date(byAdding: .day, value: amount! * 7, to: calVM.calendarSelectedDate)!
             }
         case "day":
             if (amount == nil) {
-                calendarViewModel.calendarSelectedDate = Date().resetTime!
+                calVM.calendarSelectedDate = Date().resetTime!
             } else {
-                calendarViewModel.calendarSelectedDate = Calendar.current.date(byAdding: .day, value: amount!, to: calendarViewModel.calendarSelectedDate)!
+                calVM.calendarSelectedDate = Calendar.current.date(byAdding: .day, value: amount!, to: calVM.calendarSelectedDate)!
             }
         case "agenda":
             if (amount == nil) {
-                calendarViewModel.calendarSelectedDate = Date().resetTime!
+                calVM.calendarSelectedDate = Date().resetTime!
             } else {
-                calendarViewModel.calendarSelectedDate = Calendar.current.date(byAdding: .day, value: amount! * 7, to: calendarViewModel.calendarSelectedDate)!
+                calVM.calendarSelectedDate = Calendar.current.date(byAdding: .day, value: amount! * 7, to: calVM.calendarSelectedDate)!
             }
         default:
             break
         }
         
-        calendarViewModel.updateData()
+        calVM.updateData()
     }
 }
 
